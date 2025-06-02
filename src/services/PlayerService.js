@@ -1,14 +1,22 @@
-import {useNotificationStore} from "@/stores/useNotificationStore.js";
-import {useAuthFetch} from "@/middleware/useAuthFetch.js";
+// services/playerService.js
+import { useAuthFetch } from "@/middleware/useAuthFetch.js"
+import { useUserStore } from "@/stores/user.js"
 
-const {api} = useAuthFetch()
 
-const addNewPlayer = async () => {
+export const register = async (player) => {
+  const { api } = useAuthFetch()
   try {
-    const response = await api.get('/players/add-player')
-    return response.data
+    const response = await api.post('/auth/register', player)
+
+    console.log('auth')
+
+    const { token } = response.data
+    const userStore = useUserStore()
+    userStore.setToken(token)
+
+    return { success: true }
   } catch (error) {
-    useNotificationStore().pushNotification("errors.player.not.created", true)
-    return {message: 'error.unknown.error'}
+    console.error('Error registering player:', error)
+    return { message: 'error.unknown.error' }
   }
 }

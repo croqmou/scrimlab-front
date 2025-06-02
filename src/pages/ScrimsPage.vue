@@ -1,15 +1,17 @@
 <template>
-  <header>
+  <Header />
+  <div class="scrim-header">
     <h1>SCRIMS</h1>
     <v-col class="button-col" cols="auto">
       <v-btn class="new-scrim-button" size="x-large">Create a scrim</v-btn>
     </v-col>
     <v-divider/>
-  </header>
+  </div>
 </template>
 
 <script setup>
 
+import Header from "@/components/Header.vue";
 </script>
 
 <style scoped>
@@ -21,7 +23,7 @@
 
 h1{
   text-align: center;
-  font-family: "Vermin Vibes";
+  font-family: "Vermin Vibes",serif;
   font-size: 80px;
   color: white;
   text-shadow:
@@ -33,7 +35,7 @@ h1{
 
 
 
-header{
+.scrim-header{
   background-image: url("../assets/img/rl_bg.jpg");
 }
 

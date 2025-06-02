@@ -93,6 +93,11 @@
 </script>
 
 <style scoped>
+@font-face {
+  font-family: "Vermin Vibes";
+  src: url("../assets/fonts/verminVibes.ttf");
+}
+
 h1{
   margin-top: 70px;
   text-align: center;
