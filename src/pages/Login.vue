@@ -1,16 +1,7 @@
 <template>
-  <h1>Register</h1>
+  <h1>Login</h1>
   <v-sheet class="mx-auto form-sheet" width="300">
-    <v-form @submit.prevent="registration" v-model="valid" ref="form">
-
-          <v-text-field
-            v-model="player.username"
-            maxlength="26"
-            :rules="usernameRules"
-            label="Username"
-            required
-          ></v-text-field>
-
+    <v-form @submit.prevent="connexion" v-model="valid" ref="form">
 
           <v-text-field
             v-model="player.email"
@@ -30,8 +21,8 @@
             required
           ></v-text-field>
 
-      <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Register</v-btn>
-      <a href="" class="mt-2" @click.prevent="$router.push('/login')" block>Already have an account ? Log in</a>
+      <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Login</v-btn>
+      <a href="" class="mt-2" @click.prevent="$router.push('/register')" block>New player ? Create an account</a>
     </v-form>
   </v-sheet>
 </template>
@@ -59,12 +50,6 @@ const player = ref({
 })
 
 
-const usernameRules = [
-  v => !!v || 'Username is required',
-  v => v.length <= 26 || 'Maximum 26 characters',
-  v => /^[a-zA-Z0-9_-]+$/.test(v) || 'Only letters, numbers, underscores, or hyphens allowed'
-]
-
 const pwdRules = [
   v => !!v || 'Password is required',
   v => v.length >= 8 || 'Password must be at least 8 characters',
@@ -86,12 +71,13 @@ function togglePasswordVisibility() {
 
 
 import { useRouter } from 'vue-router'
+import {login} from "@/services/AuthService.js"
 const router = useRouter()
 
-async function registration() {
+async function connexion() {
   if (valid.value) {
-    //TODO Faire une vérification avec renvoie d'erreur si player déjà existant
-    const result = await register(player.value)
+    //TODO Faire une vérification avec renvoie d'erreur si player non existant
+    const result = await login(player.value)
     if (result.success) {
       await router.push('/') // redirection après inscription
     }
