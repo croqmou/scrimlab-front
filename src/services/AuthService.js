@@ -1,4 +1,4 @@
-// services/playerService.js
+// services/AuthService.js
 import { useAuthFetch } from "@/middleware/useAuthFetch.js"
 import { useUserStore } from "@/stores/user.js"
 
@@ -14,7 +14,7 @@ export const login = async (player) => {
     return {success: true}
   } catch (error) {
     console.error('Error logging player:', error)
-    return {message: 'error.unknown.error'}
+    return {message: 'unknown.error'}
   }
 }
 
@@ -29,6 +29,6 @@ export const register = async (player) => {
     return { success: true }
   } catch (error) {
     console.error('Error registering player:', error)
-    return { message: 'error.unknown.error' }
+    return { message: 'unknown.error' }
   }
 }

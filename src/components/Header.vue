@@ -9,9 +9,10 @@
         bg-color="black"
         class="nav-bar"
       >
-        <v-tab value="scrims" style="margin-left: 50px">SCRIMS</v-tab>
+        <v-tab value="scrims" style="margin-left: 50px" to="/" exact>SCRIMS</v-tab>
         <v-tab value="leaderboard">LEADERBOARD</v-tab>
-        <v-tab value="news">NEWS</v-tab>
+        <v-tab value="teams" to="/teams" exact>TEAMS</v-tab>
+        <v-tab value="news">POPULAR</v-tab>
 
       </v-tabs>
 
@@ -125,8 +126,18 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)
 })
 
-const navbarItem = ref("")
 
+
+
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
+
+const route = useRoute();
+const navbarItem = ref(route.path.replace('/', ''));
+
+watch(() => route.path, (newPath) => {
+  navbarItem.value = newPath.replace('/', '');
+});
 </script>
 
 <style scoped>

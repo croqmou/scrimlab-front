@@ -11,6 +11,7 @@ export function useAuthFetch() {
 
   // Ajouter le token dans les headers
   api.interceptors.request.use(config => {
+
     if (userStore.token) {
       config.headers.Authorization = `Bearer ${userStore.token}`
     }

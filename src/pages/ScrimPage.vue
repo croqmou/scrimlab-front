@@ -3,7 +3,7 @@
   <div class="scrim-header">
     <h1>SCRIMS</h1>
     <v-col class="button-col" cols="auto">
-      <v-btn class="new-scrim-button" size="x-large">Create a scrim</v-btn>
+      <v-btn class="new-scrim-button" size="x-large" @click="$router.push('/new-scrim')">Create a scrim</v-btn>
     </v-col>
     <v-divider/>
   </div>
