@@ -12,7 +12,7 @@
 
       <v-file-input
         label="Choose a team logo (optional)"
-        v-model="team.teamLogo"
+        v-model="logoFile"
         accept=".jpg, .jpeg, .png"
       ></v-file-input>
 
@@ -22,98 +22,53 @@
         maxlength="50"
       ></v-text-field>
 
-      <!--
-    <v-autocomplete
-      v-model="team.playerOne"
-      :items="players"
-      label="Player 1*"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.playerTwo"
-      :items="players"
-      label="Player 2*"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.playerThree"
-      :items="players"
-      label="Player 3*"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.sub"
-      :items="players"
-      label="Sub (optional)"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.secondSub"
-      :items="players"
-      label="Second sub (optional)"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.coach"
-      :items="players"
-      label="Coach (optional)"
-      solo
-    ></v-autocomplete>
-
-    <v-autocomplete
-      v-model="team.manager"
-      :items="players"
-      label="Manager (optional)"
-      solo
-    ></v-autocomplete>
-    -->
-
       <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Create</v-btn>
     </v-form>
   </v-sheet>
 </template>
 
-
 <script setup>
-  import {ref} from "vue";
-  import {createTeamRequest} from "@/services/TeamsService.js";
-  import router from "@/router/index.js";
+import { ref } from "vue"
+import { createTeamRequest, uploadLogo } from '@/services/TeamsService.js'
+import axios from "axios"
+import router from "@/router/index.js"
 
-  const team = ref({
-    teamName: "",
-    teamLogo: "unknown.png",
-    teamDescription: "",
-    captain: null,
-    playerEntityTwo: null,
-    playerEntityThree: null,
-    sub: null,
-    secondSub: null,
-    coach: null,
-    manager: null,
-    rankingPoints: 0
-  })
+const team = ref({
+  teamName: "",
+  teamLogo: "unknown.png", // sera remplacé si upload
+  teamDescription: "",
+  captain: null,
+  playerEntityTwo: null,
+  playerEntityThree: null,
+  sub: null,
+  secondSub: null,
+  coach: null,
+  manager: null,
+  rankingPoints: 0
+})
 
-  const valid = ref(false)
+const logoFile = ref(null)
+const valid = ref(false)
 
-  const teamNameRules = [
-    v => !!v || 'Username is required',
-    v => v.length <= 26 || 'Maximum 26 characters'
-  ]
+const teamNameRules = [
+  v => !!v || 'Team name is required',
+  v => v.length <= 26 || 'Maximum 26 characters'
+]
 
 
-  function createTeam(){
-    if (valid.value) {
-      const result = createTeamRequest(team.value)
-      if (result.success) {
-        router.push('/teams') // redirection après inscription
-      }
+async function createTeam() {
+  if (valid.value) {
+    const uploadedFileName = await uploadLogo(logoFile)
+    if (uploadedFileName) {
+      team.value.teamLogo = uploadedFileName
+    }
+
+    const result = await createTeamRequest(team.value)
+    if (result.success) {
+      await router.push('/teams')
     }
   }
+}
 </script>
 
 <style scoped>
@@ -122,7 +77,7 @@
   src: url("../assets/fonts/verminVibes.ttf");
 }
 
-h1{
+h1 {
   margin-top: 70px;
   text-align: center;
   font-family: "Vermin Vibes";
@@ -135,12 +90,12 @@ h1{
     1px  1px 0 black;
 }
 
-.form-sheet{
+.form-sheet {
   margin-top: 20px;
   margin-bottom: 150px;
 }
 
-.submit{
+.submit {
   background-color: #668def;
   color: white;
 }
