@@ -112,7 +112,7 @@ const countries = [
 
 const windowWidth = ref(window.innerWidth)
 
-const isMobile = computed(() => windowWidth.value < 850)
+const isMobile = computed(() => windowWidth.value < 950)
 
 const handleResize = () => {
   windowWidth.value = window.innerWidth
@@ -143,7 +143,7 @@ watch(() => route.path, (newPath) => {
 <style scoped>
 @font-face {
   font-family: "Vermin Vibes";
-  src: url("../assets/fonts/verminVibes.ttf");
+  src: url("../assets/fonts/Vermin Vibes.woff2");
 }
 
 @font-face {
