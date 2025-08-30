@@ -56,14 +56,17 @@
 
       <v-navigation-drawer v-model="drawer" app temporary>
         <v-list>
-          <v-list-item link>
-            <v-list-item-title>Accueil</v-list-item-title>
+          <v-list-item link @click="$router.push('/')">
+            <v-list-item-title >SCRIMS</v-list-item-title>
           </v-list-item>
           <v-list-item link>
-            <v-list-item-title>À propos</v-list-item-title>
+            <v-list-item-title>LEADERBOARD</v-list-item-title>
+          </v-list-item>
+          <v-list-item link @click="$router.push('/teams')">
+            <v-list-item-title>TEAMS</v-list-item-title>
           </v-list-item>
           <v-list-item link>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>POPULAR</v-list-item-title>
           </v-list-item>
         </v-list>
 

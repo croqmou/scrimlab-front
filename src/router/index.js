@@ -1,10 +1,10 @@
 // router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import ScrimPage from '../pages/ScrimPage.vue'
-import TeamForm from '@/pages/TeamForm.vue'
+import TeamForm from '@/pages/forms/TeamForm.vue'
 import Register from '@/pages/Register.vue'
 import Login from "@/pages/Login.vue";
-import ScrimForm from "@/pages/ScrimForm.vue";
+import ScrimForm from "@/pages/forms/ScrimForm.vue";
 import TeamsPage from "@/pages/TeamsPage.vue";
 
 const routes = [

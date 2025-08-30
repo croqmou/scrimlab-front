@@ -1,36 +1,44 @@
 <template>
   <h1>New team</h1>
-  <v-sheet class="mx-auto form-sheet" width="300">
-    <v-form ref="form" v-model="valid" @submit.prevent="createTeam">
-      <v-text-field
-        v-model="team.teamName"
-        label="Team name*"
-        maxlength="26"
-        :rules="teamNameRules"
-        required
-      ></v-text-field>
+  <main>
+    <v-sheet class="mx-auto form-sheet" width="300">
+      <v-form ref="form" v-model="valid" @submit.prevent="createTeam">
+        <v-text-field
+          v-model="team.teamName"
+          label="Team name*"
+          maxlength="26"
+          :rules="teamNameRules"
+          required
+        ></v-text-field>
 
-      <v-file-input
-        label="Choose a team logo (optional)"
-        v-model="logoFile"
-        accept=".jpg, .jpeg, .png"
-      ></v-file-input>
+        <v-file-input
+          label="Choose a team logo (optional)"
+          v-model="logoFile"
+          accept=".jpg, .jpeg, .png"
+        ></v-file-input>
 
-      <v-text-field
-        v-model="team.teamDescription"
-        label="Description (optional)"
-        maxlength="50"
-      ></v-text-field>
+        <v-text-field
+          v-model="team.teamDescription"
+          label="Description (optional)"
+          maxlength="50"
+        ></v-text-field>
 
-      <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Create</v-btn>
-    </v-form>
-  </v-sheet>
+        <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Create</v-btn>
+      </v-form>
+    </v-sheet>
+
+    <aside>
+      <div>
+        <img src="" alt="">
+        <img src="" alt="">
+      </div>
+    </aside>
+  </main>
 </template>
 
 <script setup>
 import { ref } from "vue"
 import { createTeamRequest, uploadLogo } from '@/services/TeamsService.js'
-import axios from "axios"
 import router from "@/router/index.js"
 
 const team = ref({
@@ -88,6 +96,12 @@ h1 {
     1px -1px 0 black,
     -1px  1px 0 black,
     1px  1px 0 black;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-sheet {
