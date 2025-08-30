@@ -7,11 +7,17 @@
     </v-col>
     <v-divider/>
   </div>
+
+  <main>
+
+  </main>
+
 </template>
 
 <script setup>
 
 import Header from "@/components/Header.vue";
+import TeamCard from "@/components/TeamCard.vue";
 </script>
 
 <style scoped>
@@ -36,7 +42,7 @@ h1{
 
 
 .teams-header{
-  background-image: url("../assets/img/rl_bg.jpg");
+  background-image: url("../assets/img/backgrounds/headerBG.png");
 }
 
 
@@ -52,5 +58,15 @@ h1{
   margin-bottom: 50px;
 }
 
+main{
+  margin: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+main > *{
+  margin: 20px;
+}
 
 </style>

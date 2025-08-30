@@ -36,7 +36,7 @@ h1{
 
 
 .scrim-header{
-  background-image: url("../assets/img/rl_bg.jpg");
+  background-image: url("../assets/img/backgrounds/headerBG.png");
 }
 
 
