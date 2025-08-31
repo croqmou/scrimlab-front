@@ -1,13 +1,13 @@
 <template>
-  <div class="team-card-container">
-    <img src="../assets/img/logos/unknown.png" alt="" class="team-logo">
+  <div class="team-card-container" @click="console.log('team card clicked')">
+    <img :src="getLogoUrl(teamLogo)" alt="" class="team-logo">
     <div class="team-card-components">
-      <img src="../assets/img/backgrounds/headerBG.png" alt="" class="team-banner">
       <div class="team-infos">
+        <img src="../assets/img/backgrounds/headerBG.png" alt="" class="team-banner">
         <div class="team-main-infos">
-          <p>Team Vitality</p>
+          <p>{{ teamName }}</p>
           <div class="team-elo-container">
-            <p>1000</p>
+            <p>{{ rankingPoints }}</p>
             <img src="../assets/img/elo.png" alt="" class="team-elo-img">
           </div>
         </div>
@@ -16,19 +16,19 @@
           <div>
             <p>goals</p>
             <img src="../assets/img/goals.png" alt="">
-            <p>1000</p>
+            <p>{{ teamGoals }}</p>
           </div>
 
           <div>
             <p>wins</p>
             <img src="../assets/img/wins.png" alt="">
-            <p>1000</p>
+            <p>{{ teamWins }}</p>
           </div>
 
           <div>
             <p>loses</p>
             <img src="../assets/img/loses.png" alt="">
-            <p>1000</p>
+            <p>{{ teamLoses }}</p>
           </div>
 
         </div>
@@ -40,6 +40,18 @@
 
 <script setup lang="ts">
 
+defineProps({
+  teamName: String,
+  teamLogo: String,
+  rankingPoints: Number,
+  teamGoals: Number,
+  teamWins: Number,
+  teamLoses: Number
+})
+
+const getLogoUrl = (file: string) => {
+  return new URL(`../assets/img/teams-logos/${file}`, import.meta.url).href
+}
 </script>
 
 
@@ -59,6 +71,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  cursor: pointer;
 }
 
 .team-logo{
@@ -69,6 +82,7 @@
   width: 100px;
   height: 100px;
   border: 4px solid white;
+  background-color: black;
 }
 
 .team-banner{
@@ -126,6 +140,27 @@
 
 .team-secondary-infos img{
   width: 35px;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 780px){
+  .team-secondary-infos{
+    justify-content: normal;
+    left: 130px;
+    width: 0;
+  }
+
+  .team-secondary-infos div{
+    margin: 8px;
+  }
+
+  .team-secondary-infos div p{
+    font-size: 10px;
+  }
+
+  .team-secondary-infos img{
+    width: 25px;
+  }
 }
 
 </style>

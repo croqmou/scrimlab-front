@@ -39,3 +39,28 @@ export const createTeamRequest = async (team) => {
     }
   }
 }
+
+
+export const getAllTeamsRequest = async (options) => {
+  try {
+    const queryParams = new URLSearchParams();
+
+    queryParams.append('page', (options.page - 1).toString());
+    queryParams.append('size', options.itemsPerPage.toString());
+
+    if (options.sortBy) {
+      const direction = options.sortDir ?? "asc";
+      queryParams.append('sort', `${options.sortBy},${direction}`);
+    }
+
+    const { api } = useAuthFetch()
+
+
+    const result = await api.get(`/teams/getAll?${queryParams.toString()}`);
+    return result.data;
+  } catch (error) {
+    //TODO faire la gestion d'erreurs
+    //useNotificationStore().pushNotification([t('errors.assignment.not_found')], true);
+    //return { message: t('error.unknown.error') };
+  }
+};

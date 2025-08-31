@@ -8,8 +8,19 @@
     <v-divider/>
   </div>
 
-  <main>
+  <select v-model="sortBy">
+    <option value="teamName">Nom</option>
+    <option value="rankingPoints">Points</option>
+    <option value="teamWins">Victoires</option>
+  </select>
 
+  <select v-model="sortDir">
+    <option value="asc">Ascendant</option>
+    <option value="desc">Descendant</option>
+  </select>
+
+  <main>
+    <TeamCard v-for="team in teams" :teamName="team.teamName" :teamLogo="team.teamLogo" :rankingPoints="team.rankingPoints" :teamGoals="team.teamGoals" :teamWins="team.teamWins" :teamLoses="team.teamLoses" />
   </main>
 
 </template>
@@ -18,6 +29,60 @@
 
 import Header from "@/components/Header.vue";
 import TeamCard from "@/components/TeamCard.vue";
+import TeamModel from "@/models/TeamModel.js";
+import {getAllTeamsRequest} from "@/services/TeamsService.js";
+import {onMounted, ref, watch} from "vue";
+
+const sortBy = ref("teamName")   // par défaut on trie par teamName
+const sortDir = ref("asc")
+
+const options = ref({
+  page:1,
+  itemsPerPage:2,
+  sortBy: sortBy.value,
+  sortDir: sortDir.value
+})
+
+watch([sortBy, sortDir], () => {
+  options.value.sortBy = sortBy.value
+  options.value.sortDir = sortDir.value
+  loadTeams()
+})
+
+
+const teams = ref([new TeamModel()])
+
+async function getAllTeams() {
+  const response = await getAllTeamsRequest(options.value);
+
+  console.log(response)
+
+  teams.value = response.content.flatMap(team => ({
+    teamName: team.teamName,
+    teamLogo: team.teamLogo,
+    rankingPoints: team.rankingPoints,
+    teamGoals: team.teamGoals,
+    teamWins: team.teamWins,
+    teamLoses: team.teamLoses
+  }));
+}
+
+onMounted(() => {
+  getAllTeams()
+})
+
+
+
+async function loadTeams() {
+  try {
+    options.value.sortBy = sortBy.value
+    options.value.sortDir = sortDir.value
+    await getAllTeams()
+  } catch (error) {
+    console.error("Loading error :", error)
+  }
+}
+
 </script>
 
 <style scoped>
@@ -68,5 +133,6 @@ main{
 main > *{
   margin: 20px;
 }
+
 
 </style>
