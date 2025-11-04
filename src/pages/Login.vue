@@ -1,35 +1,72 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-sheet class="form-sheet pa-4" elevation="3">
-          <h1>Login</h1>
-          <v-form @submit.prevent="connexion" v-model="valid" ref="form">
+  <v-container class="fill-height login-container" fluid>
+    <!-- Image de fond -->
+    <v-img
+      src="https://images.unsplash.com/photo-1549499238-04f762d04a79?q=80&w=2940&auto=format&fit=crop"
+      class="background-image"
+      cover
+    ></v-img>
 
+    <v-row align="center" justify="center" class="z-10">
+      <v-col cols="12" sm="8" md="4">
+        <div class="text-center mb-8">
+          <v-icon color="primary" size="40">mdi-trophy-outline</v-icon>
+          <span class="app-title">Scrimlab</span>
+        </div>
+
+        <v-card class="login-card pa-8 text-center" elevation="12">
+          <h1 class="text-h4 font-weight-bold mb-2 text-white">Welcome Back</h1>
+          <p class="text-grey-lighten-1 mb-6">Login to join the competition</p>
+
+          <v-form @submit.prevent="connexion" v-model="valid" ref="form">
+            <!-- Email -->
             <v-text-field
               v-model="player.email"
               :rules="emailRules"
               label="E-mail"
+              type="email"
+              variant="outlined"
+              density="comfortable"
+              bg-color="#2A2F3A"
               required
             ></v-text-field>
 
+            <!-- Password -->
             <v-text-field
               v-model="player.pwd"
               :rules="pwdRules"
               :type="showPassword ? 'text' : 'password'"
               label="Password"
-              :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               @click:append-inner="togglePasswordVisibility"
+              variant="outlined"
+              density="comfortable"
+              bg-color="#2A2F3A"
               required
             ></v-text-field>
 
-            <v-btn class="mt-2 submit" type="submit" :disabled="!valid" block>Login</v-btn>
-            <a href="" class="mt-2 d-block text-center" @click.prevent="$router.push('/register')">
-              New player ? Create an account
-            </a>
+            <!-- Button -->
+            <v-btn
+              class="mt-4 login-btn"
+              type="submit"
+              :disabled="!valid"
+              block
+            >
+              Login
+            </v-btn>
 
+            <p class="mt-4 text-grey-lighten-1 text-body-2">
+              New player?
+              <a
+                href=""
+                class="text-primary"
+                @click.prevent="$router.push('/register')"
+              >
+                Create an account
+              </a>
+            </p>
           </v-form>
-        </v-sheet>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -84,48 +121,69 @@ async function connexion() {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: "Vermin Vibes";
-  src: url("../assets/fonts/Vermin Vibes.woff2");
+.login-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0D1117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* Assure que l'application remplit bien tout l'écran */
-.fill-height {
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  margin: 0;
-  background-color: black !important;
+  opacity: 0.1;
+  z-index: 0;
 }
 
-h1 {
-  margin-bottom: 30px;
-  text-align: center;
-  font-family: "Vermin Vibes";
-  font-size: 80px;
+.z-10 {
+  position: relative;
+  z-index: 10;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
   color: white;
-  text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
-    1px 1px 0 black;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
-.v-sheet {
-  background-color: white !important;
-  color: black;
-  border-radius: 12px;
+.login-card {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+}
+
+
+
+.login-btn {
+  background-color: #4343F0 !important;
+  color: #0D1117 !important;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.login-btn:hover {
+  background-color: #5DDCFF !important;
+  transform: scale(1.02);
+}
+.login-btn:active {
+  transform: scale(0.98);
 }
 
 a {
-  color: red;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: bold;
 }
-
-
-.submit{
-  background-color: black;
-  color: white;
-  font-size: 1.25rem;
-  padding: 1.8rem;
+a:hover {
+  text-decoration: none;
 }
-
 </style>
