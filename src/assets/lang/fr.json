@@ -1,0 +1,72 @@
+{
+  "layouts": {
+    "default": {
+      "header": {
+        "title": "Scrimlab",
+        "login": "Se connecter",
+        "logout": "Se déconnecter",
+        "navigator": {
+          "scrims": {
+            "title": "Scrims"
+          },
+          "leaderboard": {
+            "title": "Classement"
+          },
+          "teams": {
+            "title": "Équipes"
+          },
+          "popular": {
+            "title": "Populaire"
+          }
+        }
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "Scrimlab",
+      "welcome": "Bienvenue",
+      "description": "Connectez-vous pour rejoindre la compétition",
+      "login_text": "Connexion",
+      "new_player": "Nouveau joueur ?",
+      "create_account": "Créer un compte"
+    },
+    "register": {
+      "title": "Scrimlab",
+      "sub_title": "Créer un compte",
+      "description": "Rejoins la compétition et organise tes prochains matchs",
+      "register_text": "Enregistrer",
+      "old_player": "Déjà un compte ?",
+      "account_login": "Connecte-toi ici"
+    },
+    "teams": {
+      "primary_text": "Explorer les équipes",
+      "description": "Trouvez et défiez les meilleures équipes de Rocket League.",
+      "points": "Points",
+      "victories": "Victoires",
+      "region": "Région",
+      "goals": "Buts",
+      "points_abbreviated": "PTS",
+      "victories_abbreviated": "V",
+      "loses_abbreviated": "D",
+      "view_profile": "Voir le profil d'équipe",
+      "load_more_teams": "Charger plus d'équipes",
+      "search_teams": "Rechercher une équipe par nom..."
+    }
+  },
+  "popUp": {
+
+  },
+  "components": {
+
+  },
+  "loading": {
+
+  },
+  "errors": {
+
+  },
+  "success": {
+
+  }
+}

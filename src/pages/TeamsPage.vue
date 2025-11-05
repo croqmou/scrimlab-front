@@ -8,9 +8,9 @@
     <!-- MAIN CONTENT -->
     <v-main class="pa-8">
       <div class="text-center mb-10">
-        <h1 class="text-h4 font-weight-black text-white">Explorer les Équipes</h1>
+        <h1 class="text-h4 font-weight-black text-white">{{ $t('pages.teams.primary_text') }}</h1>
         <p class="text-white text-opacity-70">
-          Trouvez et défiez les meilleures équipes de Rocket League.
+          {{ $t('pages.teams.description') }}
         </p>
       </div>
 
@@ -20,7 +20,7 @@
           <v-text-field
             v-model="search"
             prepend-inner-icon="mdi-magnify"
-            label="Rechercher une équipe par nom..."
+            :label="$t('pages.teams.search_teams')"
             variant="outlined"
             color="primary"
             class="search-bar"
@@ -29,9 +29,9 @@
             density="compact"
           />
           <div class="d-flex justify-center flex-wrap gap-3">
-            <v-btn variant="outlined" color="primary" prepend-icon="mdi-trophy">Points</v-btn>
-            <v-btn variant="outlined" color="primary" prepend-icon="mdi-check">Victoires</v-btn>
-            <v-btn variant="outlined" color="primary" prepend-icon="mdi-earth">Région</v-btn>
+            <v-btn variant="outlined" color="primary" prepend-icon="mdi-trophy">{{ $t('pages.teams.points') }}</v-btn>
+            <v-btn variant="outlined" color="primary" prepend-icon="mdi-check">{{ $t('pages.teams.victories') }}</v-btn>
+            <v-btn variant="outlined" color="primary" prepend-icon="mdi-earth">{{ $t('pages.teams.region') }}</v-btn>
           </div>
         </div>
       </v-container>
@@ -57,19 +57,19 @@
                 <v-row dense class="mt-4 text-white text-opacity-80">
                   <v-col cols="6" class="d-flex align-center justify-center">
                     <v-icon color="primary" size="18">mdi-trophy</v-icon>
-                    <span class="ml-1 text-black">{{ team.rankingPoints }} PTS</span>
+                    <span class="ml-1 text-black">{{ team.rankingPoints }} {{ $t('pages.teams.points_abbreviated') }}</span>
                   </v-col>
                   <v-col cols="6" class="d-flex align-center justify-center">
                     <v-icon color="primary" size="18">mdi-soccer</v-icon>
-                    <span class="ml-1 text-black">{{ team.teamGoals }} Buts</span>
+                    <span class="ml-1 text-black">{{ team.teamGoals }} {{ $t('pages.teams.goals') }}</span>
                   </v-col>
                   <v-col cols="6" class="d-flex align-center justify-center">
                     <v-icon color="green" size="18">mdi-thumb-up</v-icon>
-                    <span class="ml-1 text-black">{{ team.teamWins }} V</span>
+                    <span class="ml-1 text-black">{{ team.teamWins }} {{ $t('pages.teams.victories_abbreviated') }}</span>
                   </v-col>
                   <v-col cols="6" class="d-flex align-center justify-center">
                     <v-icon color="red" size="18">mdi-thumb-down</v-icon>
-                    <span class="ml-1 text-black">{{ team.teamLoses }} D</span>
+                    <span class="ml-1 text-black">{{ team.teamLoses }} {{ $t('pages.teams.loses_abbreviated') }}</span>
                   </v-col>
                 </v-row>
 
@@ -79,7 +79,7 @@
                   block
                   class="mt-4 font-weight-bold"
                 >
-                  Voir le profil
+                  {{ $t('pages.teams.view_profile') }}
                 </v-btn>
               </v-card-text>
             </v-card>
@@ -90,7 +90,7 @@
       <!-- BOUTON CHARGER PLUS -->
       <div class="text-center mt-10">
         <v-btn color="primary" class="text-white font-weight-bold px-8 py-3">
-          Charger plus d'équipes
+          {{ $t('pages.teams.load_more_teams') }}
         </v-btn>
       </div>
     </v-main>
