@@ -13,10 +13,12 @@
     "@fontsource/roboto": "5.2.5",
     "@mdi/font": "^7.4.47",
     "axios": "^1.9.0",
+    "i18n": "^0.15.3",
     "jwt-decode": "^4.0.0",
     "pinia": "^3.0.2",
     "vite-plugin-vue-devtools": "^7.7.6",
     "vue": "^3.5.13",
+    "vue-i18n": "^11.1.12",
     "vuetify": "^3.8.1"
   },
   "devDependencies": {

@@ -1,0 +1,203 @@
+{
+  "layouts": {
+    "default": {
+      "header": {
+        "title": "Gestion Des Stocks",
+        "logout": "Se déconnecter"
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "Connexion",
+      "google": "Connexion avec Google",
+      "welcome": "BIENVENUE",
+      "portal": "Gestion Des Stocks"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "laptop": {
+        "title": "Parc ordinateurs"
+      },
+      "screen": {
+        "title": "Parc écrans"
+      },
+      "mobile": {
+        "title": "Parc mobiles"
+      },
+      "labels": {
+        "affectation": "Affectés",
+        "available": "Disponibles",
+        "in_repair": "En réparation",
+        "multiple": "Multiples affectations"
+      },
+      "stats": {
+        "affectation": "Appareils affectés : {nbEquipment}",
+        "available": "Appareils disponibles : {nbEquipment}",
+        "in_repair": "Appareils en réparation : {nbEquipment}",
+        "multiple": "Multiples affectations : {nbEquipment}"
+      }
+    },
+    "assignment": {
+      "title": "Attribution/Désaffectation",
+      "restitue": "Restitué",
+      "attribue": "Attribué",
+      "state": "État",
+      "start_date": "Date d'attribution",
+      "return_date": "Date de restitution"
+    },
+    "equipment": {
+      "title": "Gestion du matériel",
+      "name": "Matériel",
+      "type": "Type",
+      "brand": "Marque",
+      "model": "Modèle",
+      "serial_number": "Numéro de série",
+      "creation_date": "Date de création",
+      "current_state": "État",
+      "action": "Action",
+      "items_per_page": "Matériels par page",
+      "laptop": "Ordinateur",
+      "screen": "Écran",
+      "mobile": "Téléphone",
+      "new": "Neuf",
+      "occasion": "Occasion",
+      "good": "Bon",
+      "in_repair": "En réparation",
+      "bad": "Mauvais",
+      "other": "Autre",
+      "add_material": {
+        "button": "Créer un matériel"
+      },
+      "reset": "Réinitialiser"
+    },
+    "coworker": {
+      "title": "Suivi collaborateur",
+      "name": "Collaborateur"
+    },
+    "vehicle": {
+      "title": "Parc véhicule"
+    },
+    "authorization": {
+      "title": "Gestion des autorisation",
+      "user": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "email": "Email",
+        "state": "Statut",
+        "action": "Action",
+        "active": "Autorisé",
+        "inactive": "Non autorisé",
+        "add": "Donner l'accès à un collaborateur",
+        "activate": "Activer",
+        "desactivate": "Désactiver"
+      }
+    }
+  },
+  "navigator": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "assignment": {
+      "title": "Attribution/Désaffectation"
+    },
+    "equipment": {
+      "title": "Matériel"
+    },
+    "coworker": {
+      "title": "Suivi collaborateur"
+    },
+    "vehicle": {
+      "title": "Parc véhicule"
+    },
+    "authorization": {
+      "title": "Autorisation"
+    }
+  },
+  "popUp": {
+    "logout": {
+      "title": "Déconnexion",
+      "comment": "Êtes-vous sûr de vouloir vous déconnecter ?"
+    },
+    "user": {
+      "add": {
+        "title": "Ajouter un collaborateur",
+        "comment": "Veuillez sélectionner un collaborateur à ajouter.",
+        "search": "Rechercher un collaborateur",
+        "no_data": "Aucun collaborateur trouvé"
+      },
+      "activate": {
+        "title": "Activer un collaborateur",
+        "comment": "Êtes-vous sur de vouloir réactiver l’autorisation d’accès du compte de {userName} ?"
+      },
+      "desactivate": {
+        "title": "Désactiver un collaborateur",
+        "comment": "Êtes-vous sur de vouloir suspendre l’autorisation d’accès du compte de {userName} ?"
+      }
+    },
+    "equipment": {
+      "add": {
+        "title": "Créer un matériel",
+        "type": "Type de matériel",
+        "brand": "Marque",
+        "model": "Modèle",
+        "serial_number": "Numéro de série",
+        "creation_date": "Date de création",
+        "origin_state": "État d'origine",
+        "current_state": "État",
+        "origin": "Provenance",
+        "no_data": "Aucune donnée trouvée"
+      },
+      "no_data": "Aucune donnée trouvée"
+    }
+  },
+  "components": {
+    "buttons": {
+      "validate": "Valider",
+      "cancel": "Annuler",
+      "reset": "Réinitialiser",
+      "next": "Suivant",
+      "activate": "Activer",
+      "desactivate": "Désactiver"
+    },
+    "table": {
+      "users_per_page": "Collaborateurs par page"
+    }
+  },
+  "loading": {
+    "data": "Chargement en cours... Veuillez patienter"
+  },
+  "errors": {
+    "unknown": {
+      "error": "Erreur inconnue"
+    },
+    "required": "Ce champ est requis",
+    "invalid_email": "Email invalide",
+    "max_length": "{length} caractères maximum",
+    "unauthorized": "Vous n’êtes pas autorisé à accéder à l’application.",
+    "invalid_coworker": "Votre autorisation d’accès est désactivé. Merci de contacter un administrateur.",
+    "users": {
+      "not_found": "Pas de collaborateurs trouvés.",
+      "added": "Le collaborateur n'a pas pu être ajouté.",
+      "switch_state": "Erreur lors du changement de status du collaborateur."
+    },
+    "assignment": {
+      "not_found": "Pas d'affectation trouvées."
+    },
+    "materials": {
+      "not_found": "Pas de matériels trouvés.",
+      "not_created": "Le matériel n'a pas été créé.",
+      "invalid_filter": "Aucun matériel ne correspond à votre recherche."
+    }
+  },
+  "success": {
+    "users": {
+      "authorized": "Le collaborateur {userName} a été ajouté avec succès.",
+      "switch_state": "Le changement de status du compte a été éffectué avec succès.",
+      "created": "Le matériel a été créé avec succès."
+    },
+    "materials": {
+      "created": "Le matériel a été créé avec succès."
+    }
+  }
+}
