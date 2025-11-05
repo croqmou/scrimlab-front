@@ -112,6 +112,7 @@ function togglePasswordVisibility() {
 
 async function connexion() {
   if (valid.value) {
+    console.log("test")
     const result = await login(player.value)
     if (result.success) {
       await router.push('/')

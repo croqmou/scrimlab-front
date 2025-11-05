@@ -1,33 +1,7 @@
 <template>
+  <Header />
   <v-app>
     <v-main>
-      <v-app-bar color="background" density="comfortable" flat app>
-        <v-container class="d-flex align-center justify-space-between">
-          <div class="d-flex align-center gap-3">
-            <v-icon color="primary">mdi-grid</v-icon>
-            <h2 class="text-h6 font-weight-bold">RL Scrims</h2>
-          </div>
-
-          <v-btn-toggle mandatory>
-            <v-btn text> Trouver un Scrim </v-btn>
-            <v-btn text> Créer un Scrim </v-btn>
-            <v-btn text> Mes Équipes </v-btn>
-            <v-btn text> Mon Profil </v-btn>
-          </v-btn-toggle>
-
-          <div class="d-flex align-center gap-3">
-            <v-btn color="primary" rounded>Se connecter</v-btn>
-            <v-btn icon>
-              <v-icon>mdi-bell-outline</v-icon>
-            </v-btn>
-            <v-avatar size="40">
-              <v-img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIRNynmIIoWZ3IlIMBV3-8RhpsgpcC867dXRri_gQ6BJApQtdxyxqMPHSIuAmo360a8OKw3ENnZEj1-vqH2kfr6OVE2whkj9YXoHa_Y50uX1aF2pA8fYr-Z0X5LFCF_oozdwQuOqtUt4zj31xXskzxJXz8DDRdXo85xBJWiMJm9QCGMtb_gbrlG8lNQSCdgtgNUxkPdNrp1Kaj9UIvxNMnAxCGpFoORYeWFimKfRrI_SPE-OZU_McEMP6eDhj8l2ew4nndYv27cpA"
-              />
-            </v-avatar>
-          </div>
-        </v-container>
-      </v-app-bar>
 
       <v-container class="py-10">
         <!-- Hero section -->
@@ -222,6 +196,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Header from '@/components/Header.vue'
 
 const teams = ['Team Solaris', 'Vitality Academy', 'KCORP']
 const levels = ['Champion 1+', 'Champion 2+', 'Champion 3+', 'GC1+', 'GC2+', 'GC3+', 'SSL']
