@@ -29,7 +29,9 @@
       "description": "Connectez-vous pour rejoindre la compétition",
       "login_text": "Connexion",
       "new_player": "Nouveau joueur ?",
-      "create_account": "Créer un compte"
+      "create_account": "Créer un compte",
+      "email": "Email",
+      "password": "Mot de passe"
     },
     "register": {
       "title": "Scrimlab",
@@ -37,7 +39,10 @@
       "description": "Rejoins la compétition et organise tes prochains matchs",
       "register_text": "Enregistrer",
       "old_player": "Déjà un compte ?",
-      "account_login": "Connecte-toi ici"
+      "account_login": "Connecte-toi ici",
+      "username": "Nom d'utilisateur",
+      "email": "Email",
+      "password": "Mot de passe"
     },
     "teams": {
       "primary_text": "Explorer les équipes",

@@ -11,19 +11,19 @@
       <v-col cols="12" sm="8" md="4">
         <div class="text-center mb-8">
           <v-icon color="primary" size="40">mdi-trophy-outline</v-icon>
-          <span class="app-title">Scrimlab</span>
+          <span class="app-title">{{ $t('pages.login.title') }}</span>
         </div>
 
         <v-card class="login-card pa-8 text-center" elevation="12">
-          <h1 class="text-h4 font-weight-bold mb-2 text-white">Welcome Back</h1>
-          <p class="text-grey-lighten-1 mb-6">Login to join the competition</p>
+          <h1 class="text-h4 font-weight-bold mb-2 text-white">{{ $t('pages.login.welcome') }}</h1>
+          <p class="text-grey-lighten-1 mb-6">{{ $t('pages.login.description') }}</p>
 
           <v-form @submit.prevent="connexion" v-model="valid" ref="form">
             <!-- Email -->
             <v-text-field
               v-model="player.email"
               :rules="emailRules"
-              label="E-mail"
+              :label="$t('pages.login.email')"
               type="email"
               variant="outlined"
               density="comfortable"
@@ -36,7 +36,7 @@
               v-model="player.pwd"
               :rules="pwdRules"
               :type="showPassword ? 'text' : 'password'"
-              label="Password"
+              :label="$t('pages.login.password')"
               :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               @click:append-inner="togglePasswordVisibility"
               variant="outlined"
@@ -52,17 +52,17 @@
               :disabled="!valid"
               block
             >
-              Login
+              {{ $t('pages.login.login_text') }}
             </v-btn>
 
             <p class="mt-4 text-grey-lighten-1 text-body-2">
-              New player?
+              {{ $t('pages.login.new_player') }}
               <a
                 href=""
                 class="text-primary"
                 @click.prevent="$router.push('/register')"
               >
-                Create an account
+                {{ $t('pages.login.create_account') }}
               </a>
             </p>
           </v-form>
@@ -112,7 +112,6 @@ function togglePasswordVisibility() {
 
 async function connexion() {
   if (valid.value) {
-    console.log("test")
     const result = await login(player.value)
     if (result.success) {
       await router.push('/')

@@ -20,6 +20,7 @@ export const useUserStore = defineStore('user', {
       this.userDetails = null
       this.token = null
       localStorage.removeItem('token')
+      localStorage.removeItem('tokenExpiry')
     },
     checkTokenExpiry() {
       const expiry = localStorage.getItem('tokenExpiry')

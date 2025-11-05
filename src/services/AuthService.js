@@ -18,6 +18,14 @@ export const login = async (player) => {
   }
 }
 
+
+export const authLogout = async () => {
+  const { api } = useAuthFetch()
+  const userStore = useUserStore()
+  await api.post('/auth/logout', {}, {
+    headers: { Authorization: `Bearer ${userStore.token}` }
+  })
+}
 export const register = async (player) => {
   const { api } = useAuthFetch()
   try {

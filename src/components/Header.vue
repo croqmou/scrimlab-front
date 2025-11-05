@@ -20,12 +20,11 @@
 
         <div class="d-flex align-center gap-3 right-zone">
           <v-btn
-            v-if="!userStore.token"
-            color="primary"
+            :color="userStore.token ? 'red' : 'primary'"
             class="text-white font-weight-bold"
-            @click="$router.push('/login')"
+            @click="logout"
           >
-            {{ $t('layouts.default.header.login') }}
+            {{ userStore.token ? $t('layouts.default.header.logout') : $t('layouts.default.header.login') }}
           </v-btn>
 
           <v-avatar size="40" class="ma-3">
@@ -87,9 +86,9 @@
         </v-list-item>
 
         <!-- LOGIN BUTTON -->
-        <v-list-item v-if="!userStore.token" class="mt-4">
-          <v-btn color="primary" class="text-white font-weight-bold" block @click="$router.push('/login')">
-            {{ $t('layouts.default.header.login') }}
+        <v-list-item class="mt-4">
+          <v-btn :color="userStore.token ? 'red' : 'primary'" class="text-white font-weight-bold" block @click="logout">
+            {{ userStore.token ? $t('layouts.default.header.logout') : $t('layouts.default.header.login') }}
           </v-btn>
         </v-list-item>
 
@@ -132,6 +131,9 @@ import { useRoute } from "vue-router";
 import { useI18n } from 'vue-i18n'
 import Cookies from 'js-cookie'
 import { useUserStore } from "@/stores/user.js";
+import router from '@/router/index.js'
+import {authLogout} from "@/services/AuthService.js";
+
 
 const userStore = useUserStore();
 
@@ -163,6 +165,15 @@ onMounted(() => {
   window.addEventListener("resize", handleResize);
   handleResize();
 });
+
+
+function logout(){
+  if(userStore.token){
+    authLogout()
+    userStore.clearAuth()
+  }
+  router.push("/login")
+}
 
 onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
 

@@ -26,10 +26,12 @@
     "login": {
       "title": "Scrimlab",
       "welcome": "Welcome",
-      "description": "Log in to join the competition",
+      "description": "Login to join the competition",
       "login_text": "Login",
       "new_player": "New player?",
-      "create_account": "Create an account"
+      "create_account": "Create an account",
+      "email": "Email",
+      "password": "Password"
     },
     "register": {
       "title": "Scrimlab",
@@ -37,7 +39,10 @@
       "description": "Join the competition and organize your upcoming matches",
       "register_text": "Register",
       "old_player": "Already have an account?",
-      "account_login": "Log in here"
+      "account_login": "Login here",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password"
     },
     "teams": {
       "primary_text": "Explore the teams",

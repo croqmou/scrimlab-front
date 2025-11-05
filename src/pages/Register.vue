@@ -12,13 +12,13 @@
         <!-- Titre -->
         <div class="text-center mb-8">
           <v-icon color="primary" size="40">mdi-trophy-outline</v-icon>
-          <span class="app-title">Scrimlab</span>
+          <span class="app-title">{{ $t('pages.register.title') }}</span>
         </div>
 
         <v-card class="register-card pa-8 text-center" elevation="12">
-          <h1 class="text-h4 font-weight-bold mb-2 text-white">Create your account</h1>
+          <h1 class="text-h4 font-weight-bold mb-2 text-white">{{ $t('pages.register.sub_title') }}</h1>
           <p class="text-grey-lighten-1 mb-6">
-            Join the competition and organize your next matches
+            {{ $t('pages.register.description') }}
           </p>
 
           <!-- Formulaire -->
@@ -27,7 +27,7 @@
             <v-text-field
               v-model="player.username"
               :rules="usernameRules"
-              label="Username"
+              :label="$t('pages.register.username')"
               maxlength="26"
               variant="outlined"
               density="comfortable"
@@ -39,7 +39,7 @@
             <v-text-field
               v-model="player.email"
               :rules="emailRules"
-              label="E-mail"
+              :label="$t('pages.register.email')"
               type="email"
               variant="outlined"
               density="comfortable"
@@ -52,7 +52,7 @@
               v-model="player.pwd"
               :rules="pwdRules"
               :type="showPassword ? 'text' : 'password'"
-              label="Password"
+              :label="$t('pages.register.password')"
               :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               @click:append-inner="togglePasswordVisibility"
               variant="outlined"
@@ -63,17 +63,17 @@
 
             <!-- Button -->
             <v-btn class="mt-4 register-btn" type="submit" :disabled="!valid" block>
-              Register
+              {{ $t('pages.register.register_text') }}
             </v-btn>
 
             <p class="mt-4 text-grey-lighten-1 text-body-2">
-              Already have an account?
+              {{ $t('pages.register.old_player') }}
               <a
                 href=""
                 class="text-primary"
                 @click.prevent="$router.push('/login')"
               >
-                Log in here
+                {{ $t('pages.register.account_login') }}
               </a>
             </p>
           </v-form>
