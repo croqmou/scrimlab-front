@@ -16,6 +16,9 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem('token', token)
       localStorage.setItem('tokenExpiry', expiry.toString())
     },
+    setPlayer(player) {
+      localStorage.setItem("player", JSON.stringify(player))
+    },
     clearAuth() {
       this.userDetails = null
       this.token = null

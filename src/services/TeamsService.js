@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode"
 import { useAuthFetch } from "@/middleware/useAuthFetch.js"
 import i18n from '@/plugins/i18n.js'
+import { useNotificationStore } from '@/stores/useNotificationStore.js'
 
 const {t} = i18n.global
 
@@ -17,7 +18,7 @@ const TeamsService = {
       const response = await api.post("/files/upload", formData)
       return response.data.filename
     } catch (error) {
-      //TODO créer une exception personnalisée
+      useNotificationStore().pushNotification([t('errors.teams.logo_upload')], true);
       return {message: t('errors.teams.logo_upload')}
     }
   },
@@ -34,12 +35,13 @@ const TeamsService = {
       const { api } = useAuthFetch()
       await api.post("/teams/create", team)
 
+      useNotificationStore().pushNotification([t('success.teams.created')], false);
       return { success: true }
     } catch (error) {
-      console.error("Error creating team:", error.response?.data || error)
+      useNotificationStore().pushNotification([t('errors.teams.create')], true);
       return {
         success: false,
-        message: error.response?.data?.message || "errors.teams.create",
+        message: t("errors.teams.create"),
       }
     }
   },
@@ -60,8 +62,8 @@ const TeamsService = {
       const result = await api.get(`/teams/getAll?${queryParams.toString()}`)
       return result.data
     } catch (error) {
-      console.error("Erreur lors de la récupération des équipes :", error)
-      return { success: false, message: "errors.teams.get_all" }
+      useNotificationStore().pushNotification([t('errors.teams.get_all')], true);
+      return { success: false, message: t('errors.teams.get_all') }
     }
   },
 }

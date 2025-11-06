@@ -47,6 +47,7 @@
     "teams": {
       "primary_text": "Explore the teams",
       "description": "Find and challenge the best Rocket League teams.",
+      "create": "Create a team",
       "points": "Points",
       "victories": "Victories",
       "region": "Region",
@@ -81,6 +82,13 @@
     "unknown": "Unknown error"
   },
   "success": {
-
+    "auth": {
+      "login": "Login successful",
+      "logout": "Logout successful",
+      "register": "Register successful"
+    },
+    "teams": {
+      "created": "Team created successfully"
+    }
   }
 }

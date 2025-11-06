@@ -1,6 +1,7 @@
 import i18n from "@/plugins/i18n.js";
 import { useAuthFetch } from "@/middleware/useAuthFetch.js"
 import { useUserStore } from "@/stores/user.js"
+import { useNotificationStore } from '@/stores/useNotificationStore.js'
 
 const {t} = i18n.global
 
@@ -13,8 +14,11 @@ const AuthService = {
       const { token } = response.data
       const userStore = useUserStore()
       userStore.setToken(token)
+      userStore.setPlayer(player)
+      useNotificationStore().pushNotification([t('success.auth.login')], false);
       return { success: true }
     } catch (error) {
+      useNotificationStore().pushNotification([t('errors.auth.login')], true);
       return {message: t('errors.auth.login')}
     }
   },
@@ -27,8 +31,10 @@ const AuthService = {
         headers: { Authorization: `Bearer ${userStore.token}` }
       })
       userStore.$reset()
+      useNotificationStore().pushNotification([t('success.auth.login')], false);
       return { success: true }
     } catch (error) {
+      useNotificationStore().pushNotification([t('errors.unknown')], true);
       return {message: t('errors.unknown')}
     }
   },
@@ -40,8 +46,10 @@ const AuthService = {
       const { token } = response.data
       const userStore = useUserStore()
       userStore.setToken(token)
+      useNotificationStore().pushNotification([t('success.auth.register')], false);
       return { success: true }
     } catch (error) {
+      useNotificationStore().pushNotification([t('errors.auth.register')], true);
       return {message: t('errors.auth.register')}
     }
   }

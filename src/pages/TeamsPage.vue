@@ -12,6 +12,8 @@
         <p class="text-white text-opacity-70">
           {{ $t('pages.teams.description') }}
         </p>
+
+        <v-btn class="mt-10" size="x-large" color="primary" @click="openTeamCreationPage">{{ $t('pages.teams.create') }}</v-btn>
       </div>
 
       <!-- Barre de recherche et filtres -->
@@ -99,17 +101,20 @@
 
 <script setup>
 
-import TeamModel from "@/models/TeamModel.js";
-import TeamsService from "@/services/TeamsService.js";
-import {onMounted, ref, watch} from "vue";
+import TeamModel from '@/models/TeamModel.js'
+import TeamsService from '@/services/TeamsService.js'
+import { onMounted, ref, watch } from 'vue'
 import Header from '@/components/Header.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const sortBy = ref("teamName")   // par défaut on trie par teamName
 const sortDir = ref("asc")
 
 const options = ref({
   page:1,
-  itemsPerPage:2,
+  itemsPerPage:20,
   sortBy: sortBy.value,
   sortDir: sortDir.value
 })
@@ -144,6 +149,15 @@ onMounted(() => {
   getAllTeams()
 })
 
+
+function openTeamCreationPage() {
+  const token = localStorage.getItem('token')
+  if (token) {
+    router.push('/new-team')
+  } else {
+    router.push('/login')
+  }
+}
 
 
 async function loadTeams() {

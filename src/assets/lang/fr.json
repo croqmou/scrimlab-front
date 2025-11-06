@@ -47,6 +47,7 @@
     "teams": {
       "primary_text": "Explorer les équipes",
       "description": "Trouvez et défiez les meilleures équipes de Rocket League.",
+      "create": "Créer une équipe",
       "points": "Points",
       "victories": "Victoires",
       "region": "Région",
@@ -81,6 +82,13 @@
     "unknown": "Erreur inconnue"
   },
   "success": {
-
+    "auth": {
+      "login": "Connexion réussie",
+      "logout": "Deconnexion réussie",
+      "register": "Enregistrement réussi"
+    },
+    "teams": {
+      "created": "Équipe crées avec succès"
+    }
   }
 }

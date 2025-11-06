@@ -27,8 +27,12 @@
             {{ userStore.token ? $t('layouts.default.header.logout') : $t('layouts.default.header.login') }}
           </v-btn>
 
-          <v-avatar size="40" class="ma-3">
-            <v-img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7ggl3Nk_TTFjkgob021TFeyknN9zsRtey2F4G4jWnu2sSRwLysgsZ7r3u5Gi1P4rXYtsqyZ6bS7Ax3Jqck33Q2jonzTR8FPwg9EnkixUOyHZsqpGf5MJwqUnlP4F1HHWFD4ytTnAoUttY51YIA2zSMOz63GjTMLCEvOZs5DnOKnKg-syxUOnthavRAdLHDChDv_CN2TqcgwwZP0r-7oQQqLP6qVqS_e6h-o_AGfFN9O_9iXOTFckwX1k42yH9jQRYsDCVYzwDuw0" />
+          <v-avatar v-if="userStore.token" size="40" class="ma-3 overflow-hidden">
+            <img
+              :src="getPlayerPP()"
+              alt="player"
+              class="player-logo-img"
+            />
           </v-avatar>
 
           <v-select
@@ -155,6 +159,11 @@ const handleResize = () => {
   if (!isMobile.value) drawer.value = false;
 };
 
+function getPlayerPP() {
+  const pp = JSON.parse(localStorage.getItem("player")).pp
+  return new URL(`../assets/img/players-pp/${pp}`, import.meta.url).href
+}
+
 onMounted(() => {
   const lang = locale.value.toUpperCase();
   const country = countries.find(c => c.code === lang) || countries[0];
@@ -274,5 +283,16 @@ header {
 
 .v-list-item {
   padding: 0.25rem 0 !important;
+}
+
+.player-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: grey;
+}
+
+.player-logo-img:hover {
+  cursor: pointer;
 }
 </style>
