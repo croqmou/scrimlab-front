@@ -69,7 +69,16 @@
 
   },
   "errors": {
-
+    "auth": {
+      "login": "Email ou password incorrect",
+      "register": "Player already exists"
+    },
+    "teams": {
+      "create": "Team already exists",
+      "get_all": "Get all teams error",
+      "logo_upload": "Logo upload error"
+    },
+    "unknown": "Unknown error"
   },
   "success": {
 

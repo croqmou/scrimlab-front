@@ -85,7 +85,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { register } from "@/services/AuthService.js";
+import AuthService from "@/services/AuthService.js";
 import { useRouter } from "vue-router";
 
 const valid = ref(false);
@@ -131,7 +131,7 @@ function togglePasswordVisibility() {
 
 async function registration() {
   if (valid.value) {
-    const result = await register(player.value);
+    const result = await AuthService.register(player.value);
     if (result.success) {
       await router.push("/");
     }

@@ -100,7 +100,7 @@
 <script setup>
 
 import TeamModel from "@/models/TeamModel.js";
-import {getAllTeamsRequest} from "@/services/TeamsService.js";
+import TeamsService from "@/services/TeamsService.js";
 import {onMounted, ref, watch} from "vue";
 import Header from '@/components/Header.vue'
 
@@ -124,7 +124,7 @@ watch([sortBy, sortDir], () => {
 const teams = ref([new TeamModel()])
 
 async function getAllTeams() {
-  const response = await getAllTeamsRequest(options.value);
+  const response = await TeamsService.getAllTeams(options.value);
 
   teams.value = response.content.flatMap(team => ({
     teamName: team.teamName,

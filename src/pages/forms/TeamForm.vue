@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref } from "vue"
-import { createTeamRequest, uploadLogo } from '@/services/TeamsService.js'
+import TeamsService from '@/services/TeamsService.js'
 import router from "@/router/index.js"
 
 const team = ref({
@@ -66,12 +66,12 @@ const teamNameRules = [
 
 async function createTeam() {
   if (valid.value) {
-    const uploadedFileName = await uploadLogo(logoFile)
+    const uploadedFileName = await TeamsService.uploadLogo(logoFile)
     if (uploadedFileName) {
       team.value.teamLogo = uploadedFileName
     }
 
-    const result = await createTeamRequest(team.value)
+    const result = await TeamsService.createTeam(team.value)
     if (result.success) {
       await router.push('/teams')
     }

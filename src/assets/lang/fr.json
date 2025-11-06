@@ -69,7 +69,16 @@
 
   },
   "errors": {
-
+    "auth": {
+      "login": "Email ou mot de passe incorrect",
+      "register": "Le joueur existe déjà"
+    },
+    "teams": {
+      "create": "L'équipe existe déjà",
+      "get_all": "Erreur lors de la récupération de toutes les équipes",
+      "logo_upload": "Erreur lors du téléversement du logo"
+    },
+    "unknown": "Erreur inconnue"
   },
   "success": {
 

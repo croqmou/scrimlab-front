@@ -26,6 +26,7 @@ const datetimeFormats = {
 const defaultLocale = Cookies.get('locale') || 'en' // Si cookie existe, utilise-le, sinon anglais
 
 const i18n = createI18n({
+  legacy: false,
   locale: defaultLocale,
   fallbackLocale: 'en',
   messages: { en, fr }

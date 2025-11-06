@@ -132,12 +132,12 @@ import { useI18n } from 'vue-i18n'
 import Cookies from 'js-cookie'
 import { useUserStore } from "@/stores/user.js";
 import router from '@/router/index.js'
-import {authLogout} from "@/services/AuthService.js";
+import AuthService from "@/services/AuthService.js";
 
 
 const userStore = useUserStore();
 
-const { locale } = useI18n()  // 'locale' est réactif
+const { locale } = useI18n()
 
 
 const drawer = ref(false);
@@ -152,11 +152,10 @@ const isMobile = computed(() => windowWidth.value <= 950);
 
 const handleResize = () => {
   windowWidth.value = window.innerWidth;
-  if (!isMobile.value) drawer.value = false; // fermer drawer si on repasse en desktop
+  if (!isMobile.value) drawer.value = false;
 };
 
 onMounted(() => {
-  // Définir le drapeau correspondant à la locale au chargement
   const lang = locale.value.toUpperCase();
   const country = countries.find(c => c.code === lang) || countries[0];
   selectedCountry.value = { ...country };
@@ -169,7 +168,7 @@ onMounted(() => {
 
 function logout(){
   if(userStore.token){
-    authLogout()
+    AuthService.logout()
     userStore.clearAuth()
   }
   router.push("/login")
@@ -182,8 +181,8 @@ const navbarItem = ref(route.path.replace("/", ""));
 watch(() => route.path, (newPath) => (navbarItem.value = newPath.replace("/", "")));
 
 watch(selectedCountry, (newVal) => {
-  locale.value = newVal.code.toLowerCase() // change la langue i18n
-  Cookies.set('locale', newVal.code.toLowerCase(), { expires: 365 }) // sauvegarde dans cookie 1 an
+  locale.value = newVal.code.toLowerCase()
+  Cookies.set('locale', newVal.code.toLowerCase(), { expires: 365 })
 })
 </script>
 
