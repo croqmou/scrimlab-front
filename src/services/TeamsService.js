@@ -15,7 +15,24 @@ const TeamsService = {
     const { api } = useAuthFetch()
 
     try {
-      const response = await api.post("/files/upload", formData)
+      const response = await api.post("/files/upload/team-logo", formData)
+      return response.data.filename
+    } catch (error) {
+      useNotificationStore().pushNotification([t('errors.teams.logo_upload')], true);
+      return {message: t('errors.teams.logo_upload')}
+    }
+  },
+
+  async uploadBanner(bannerFile) {
+    if (!bannerFile?.value) return null
+
+    const formData = new FormData()
+    formData.append("file", bannerFile.value)
+
+    const { api } = useAuthFetch()
+
+    try {
+      const response = await api.post("/files/upload/team-banner", formData)
       return response.data.filename
     } catch (error) {
       useNotificationStore().pushNotification([t('errors.teams.logo_upload')], true);

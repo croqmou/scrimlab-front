@@ -1,7 +1,8 @@
 export default class AffectationModel{
-  constructor(teamName,teamLogo, teamDescription,captain, playerTwo,playerThree,sub,secondSub,coach,manager,rankingPoints,teamGoals,teamWins,teamLoses) {
+  constructor(teamName,teamLogo, teamBanner, teamDescription,captain, playerTwo,playerThree,sub,secondSub,coach,manager,rankingPoints,teamGoals,teamWins,teamLoses) {
     this.teamName = teamName;
     this.teamLogo = teamLogo;
+    this.teamLogo = teamBanner;
     this.teamDescription = teamDescription;
     this.captain = captain;
     this.playerTwo = playerTwo;

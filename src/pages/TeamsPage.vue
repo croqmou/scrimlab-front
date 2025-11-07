@@ -47,7 +47,7 @@
             cols="12" sm="6" md="4" lg="3"
           >
             <v-card class="bg-[#1f232c] text-white hover:scale-105 transition-all duration-300">
-              <v-img :src="getLogoUrl(team.teamLogo)" height="150px" cover></v-img>
+              <v-img :src="getBannerUrl(team.teamBanner)" height="150px" cover></v-img>
               <div class="d-flex justify-center mt-n10">
                 <v-avatar size="120" class="elevation-4 border border-dark">
                   <v-img :src="getLogoUrl(team.teamLogo)" />
@@ -134,6 +134,7 @@ async function getAllTeams() {
   teams.value = response.content.flatMap(team => ({
     teamName: team.teamName,
     teamLogo: team.teamLogo,
+    teamBanner: team.teamBanner,
     rankingPoints: team.rankingPoints,
     teamGoals: team.teamGoals,
     teamWins: team.teamWins,
@@ -143,6 +144,10 @@ async function getAllTeams() {
 
 const getLogoUrl = (file) => {
   return new URL(`../assets/img/teams-logos/${file}`, import.meta.url).href
+}
+
+const getBannerUrl = (file) => {
+  return new URL(`../assets/img/teams-banners/${file}`, import.meta.url).href
 }
 
 onMounted(() => {
