@@ -7,14 +7,15 @@ const {t} = i18n.global
 
 const AuthService = {
 
-  async login(player) {
+  async login(newPlayer) {
     const { api } = useAuthFetch()
     try {
-      const response = await api.post('/auth/login', player)
-      const { token } = response.data
+      const response = await api.post('/auth/login', newPlayer)
+      const { token, player } = response.data
       const userStore = useUserStore()
       userStore.setToken(token)
       userStore.setPlayer(player)
+
       useNotificationStore().pushNotification([t('success.auth.login')], false);
       return { success: true }
     } catch (error) {
@@ -31,6 +32,7 @@ const AuthService = {
         headers: { Authorization: `Bearer ${userStore.token}` }
       })
       userStore.$reset()
+      userStore.clearAuth()
       useNotificationStore().pushNotification([t('success.auth.login')], false);
       return { success: true }
     } catch (error) {
@@ -39,13 +41,14 @@ const AuthService = {
     }
   },
 
-  async register(player) {
+  async register(newPlayer) {
     const { api } = useAuthFetch()
     try {
-      const response = await api.post('/auth/register', player)
-      const { token } = response.data
+      const response = await api.post('/auth/register', newPlayer)
+      const { token, player } = response.data
       const userStore = useUserStore()
       userStore.setToken(token)
+      userStore.setPlayer(player)
       useNotificationStore().pushNotification([t('success.auth.register')], false);
       return { success: true }
     } catch (error) {

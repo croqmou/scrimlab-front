@@ -27,7 +27,7 @@
             {{ userStore.token ? $t('layouts.default.header.logout') : $t('layouts.default.header.login') }}
           </v-btn>
 
-          <v-avatar v-if="userStore.token" size="40" class="ma-3 overflow-hidden">
+          <v-avatar v-if="userStore.token" size="40" class="ma-3 overflow-hidden" @click="$router.push('/profile')">
             <img
               :src="getPlayerPP()"
               alt="player"
@@ -152,7 +152,7 @@ const countries = [
 ];
 
 const windowWidth = ref(window.innerWidth);
-const isMobile = computed(() => windowWidth.value <= 950);
+const isMobile = computed(() => windowWidth.value <= 1200);
 
 const handleResize = () => {
   windowWidth.value = window.innerWidth;

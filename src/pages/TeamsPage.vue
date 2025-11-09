@@ -13,7 +13,7 @@
           {{ $t('pages.teams.description') }}
         </p>
 
-        <v-btn class="mt-10" size="x-large" color="primary" @click="openTeamCreationPage">{{ $t('pages.teams.create') }}</v-btn>
+        <v-btn class="mt-10" size="x-large" color="primary" @click="$router.push('/new-team')">{{ $t('pages.teams.create') }}</v-btn>
       </div>
 
       <!-- Barre de recherche et filtres -->
@@ -109,7 +109,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const sortBy = ref("teamName")   // par défaut on trie par teamName
+const sortBy = ref("teamName")
 const sortDir = ref("asc")
 
 const options = ref({
@@ -153,16 +153,6 @@ const getBannerUrl = (file) => {
 onMounted(() => {
   getAllTeams()
 })
-
-
-function openTeamCreationPage() {
-  const token = localStorage.getItem('token')
-  if (token) {
-    router.push('/new-team')
-  } else {
-    router.push('/login')
-  }
-}
 
 
 async function loadTeams() {

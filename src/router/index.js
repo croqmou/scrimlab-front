@@ -6,7 +6,7 @@ import Register from '@/pages/Register.vue'
 import Login from "@/pages/Login.vue";
 import ScrimForm from "@/pages/forms/ScrimForm.vue";
 import TeamsPage from "@/pages/TeamsPage.vue";
-import PlayerProfile from '@/pages/PlayerProfile.vue'
+import PlayerProfilePage from '@/pages/PlayerProfilePage.vue'
 
 const routes = [
   { path: '/', name: 'Scrims', component: ScrimPage, meta: { requiresAuth: false } },
@@ -15,12 +15,22 @@ const routes = [
   { path: '/login', name: 'Login', component: Login },
   { path: '/new-scrim', name: 'NewScrim', component: ScrimForm, meta: { requiresAuth: true } },
   { path: '/teams', name: 'Teams', component: TeamsPage, meta: { requiresAuth: false } },
-  { path: '/profile', name: 'PlayerProfile', component: PlayerProfile, meta: { requiresAuth: true } }
+  { path: '/profile', name: 'PlayerProfile', component: PlayerProfilePage, meta: { requiresAuth: true } }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+
+  if (to.meta.requiresAuth && !token) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router
