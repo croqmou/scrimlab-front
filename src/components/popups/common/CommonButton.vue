@@ -1,12 +1,17 @@
 <template>
-  <v-btn :v-bind="$attrs"
-         :class="[rounded ? '':'pnf-button && rounded',variant]"
-         :rounded="rounded"
-         :disabled="disable"
-
+  <v-btn
+    v-bind="$attrs"
+    :class="[
+    'scrimlab-button',
+    variant,
+    { 'scrimlab-rounded-button': rounded }
+  ]"
+    :rounded="rounded"
+    :disabled="disable"
   >
     <slot></slot>
   </v-btn>
+
 </template>
 
 <script setup lang="ts">
@@ -21,7 +26,7 @@ defineProps<{
 
 <style scoped>
 
-.pnf-button {
+.scrimlab-button {
   background-color: var(--active-button-color);
   color: var(--active-button-text-color);
   height: 3rem;
@@ -43,7 +48,7 @@ defineProps<{
   border: 1px solid black;
 }
 
-.pnf-rounded-button {
+.scrimlab-rounded-button {
   min-width: 3rem;
   min-height: 3rem;
 }

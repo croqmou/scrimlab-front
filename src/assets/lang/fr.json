@@ -73,7 +73,8 @@
       "tournaments": {
         "title": "Tournois",
         "add": "Ajouter un tournoi",
-        "result": "Résultat"
+        "result": "Résultat",
+        "no_data": "Aucune tournoi ajouté pour le moment"
       }
     }
   },

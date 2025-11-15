@@ -14,3 +14,8 @@ import {useUserStore} from "@/stores/user.js";
 const userStore = useUserStore()
 userStore.initAuthCheck()
 </script>
+
+<style>
+@import "assets/css/colors.css";
+@import "assets/css/main.css";
+</style>

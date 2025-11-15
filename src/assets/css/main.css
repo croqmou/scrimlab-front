@@ -1,0 +1,13 @@
+h1 {
+    font-weight: 400;
+    font-size: revert;
+}
+
+h2 {
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.bg-light-grey {
+    background-color: var(--background-navigator-color)
+}

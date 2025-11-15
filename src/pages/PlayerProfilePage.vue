@@ -85,12 +85,15 @@
           </v-btn>
         </div>
         <v-row>
-          <v-col cols="12" sm="6" md="4" v-for="tournament in prizesLists" :key="tournament.name">
+          <v-col v-if="prizesLists.length > 0" cols="12" sm="6" md="4" v-for="tournament in prizesLists" :key="tournament.name">
             <v-card class="pa-4 bg-surface border border-white/10 hover:border-primary">
               <p class="text-primary font-weight-bold">{{ tournament.prizeListName }}</p>
               <p class="text-black text-opacity-70 text-body-2">{{ tournament.tournamentDate }}</p>
               <p class="text-black font-weight-semibold">{{ $t('pages.player_profile.tournaments.result') }} : {{ tournament.result }}</p>
             </v-card>
+          </v-col>
+          <v-col v-else>
+            <p class="text-grey mb-4">{{ $t('pages.player_profile.tournaments.no_data') }}</p>
           </v-col>
         </v-row>
       </section>
@@ -203,6 +206,7 @@ onMounted(async () => {
   await getPlayer();
   await getAllTeams();
   await getAllPrizesLists();
+  console.log(prizesLists.value)
 });
 
 </script>

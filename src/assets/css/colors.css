@@ -1,0 +1,16 @@
+:root {
+    --background-navigator-color: #F5F5F5;
+    --active-button-color: #093C5B;
+    --active-delete-button-color: #f54646;
+    --active-button-text-color: #FFFFFF;
+    --background-color: #FFFFFF;
+    --grey-error-text: #636364;
+    --header-table-color: #eaeaea;
+    --next-exercise-color: #069855;
+    --ended-formation-instance: #686D76;
+    --progress-formation-instance: #069855;
+    --in-coming-formation-instance: #006BFF;
+    --btn-bg-color: #D3D3D3;
+    --btn-text-color: #000000;
+    --grey-background-color: #dddddd;
+}

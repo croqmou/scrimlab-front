@@ -73,7 +73,8 @@
       "tournaments": {
         "title": "Tournaments",
         "add": "Add a tournament",
-        "result": "Result"
+        "result": "Result",
+        "no_data": "No tournament added yet"
       }
 
     }
