@@ -58,13 +58,44 @@
       "view_profile": "View team profile",
       "load_more_teams": "Load more teams",
       "search_teams": "Research a team by name..."
+    },
+    "player_profile": {
+      "teams": {
+        "title": "Teams"
+      },
+      "scrims": {
+        "title": "Scrims History",
+        "opponent": "Opponent",
+        "score": "Score",
+        "result": "Result",
+        "date": "Date"
+      },
+      "tournaments": {
+        "title": "Tournaments",
+        "add": "Add a tournament",
+        "result": "Result"
+      }
+
     }
   },
   "popUp": {
-
+    "prize_list": {
+      "add": {
+        "title": "Add a Tournament",
+        "comment": "Please fill in the fields to add a new tournament to your record.",
+        "prize_list_name": "Tournament Name",
+        "tournament_date": "Tournament Date",
+        "tournament_result": "Tournament result (placement)"
+      }
+    }
   },
   "components": {
-
+    "buttons": {
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "next": "Next",
+      "validate": "Validate"
+    }
   },
   "loading": {
 
@@ -78,6 +109,9 @@
       "create": "Team already exists",
       "get_all": "Get all teams error",
       "logo_upload": "Logo upload error"
+    },"prize_list": {
+      "create": "Tournament already added to prizes list",
+      "get": "Error while retrieving the tournaments from the prizes list"
     },
     "unknown": "Unknown error"
   },
@@ -85,10 +119,13 @@
     "auth": {
       "login": "Login successful",
       "logout": "Logout successful",
-      "register": "Register successful"
+      "register": "Registration successful"
     },
     "teams": {
       "created": "Team created successfully"
+    },
+    "prize_list": {
+      "created": "Tournament added to the prizes list"
     }
   }
 }

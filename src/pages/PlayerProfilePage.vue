@@ -34,7 +34,7 @@
 
       <!-- Teams -->
       <section class="mt-8">
-        <h2 class="text-white text-h6 font-weight-bold mb-4">Équipes</h2>
+        <h2 class="text-white text-h6 font-weight-bold mb-4">{{ $t('pages.player_profile.teams.title') }}</h2>
         <v-row>
           <v-col cols="12" sm="6" md="4" v-for="team in teams" :key="team.name">
             <v-card class="pa-4 text-center bg-surface border border-white/10">
@@ -49,14 +49,14 @@
 
       <!-- Scrims -->
       <section class="mt-8">
-        <h2 class="text-white text-h6 font-weight-bold mb-4">Historique des Scrims</h2>
+        <h2 class="text-white text-h6 font-weight-bold mb-4">{{ $t('pages.player_profile.scrims.title') }}</h2>
         <v-table class="bg-surface border border-white/10">
           <thead>
           <tr class="text-black text-uppercase text-caption">
-            <th>Adversaire</th>
-            <th>Score</th>
-            <th>Résultat</th>
-            <th>Date</th>
+            <th>{{ $t('pages.player_profile.scrims.opponent') }}</th>
+            <th>{{ $t('pages.player_profile.scrims.score') }}</th>
+            <th>{{ $t('pages.player_profile.scrims.result') }}</th>
+            <th>{{ $t('pages.player_profile.scrims.date') }}</th>
           </tr>
           </thead>
           <tbody>
@@ -79,23 +79,29 @@
       <!-- Tournois -->
       <section class="mt-8">
         <div class="d-flex justify-space-between align-center mb-4">
-          <h2 class="text-white text-h6 font-weight-bold">Tournois</h2>
-          <v-btn color="primary" prepend-icon="mdi-plus" class="text-white font-weight-bold">
-            Ajouter un Tournoi
+          <h2 class="text-white text-h6 font-weight-bold">{{ $t('pages.player_profile.tournaments.title') }}</h2>
+          <v-btn color="primary" prepend-icon="mdi-plus" class="text-white font-weight-bold" @click="openPopUp()">
+            {{ $t('pages.player_profile.tournaments.add') }}
           </v-btn>
         </div>
         <v-row>
-          <v-col cols="12" sm="6" md="4" v-for="tournament in tournaments" :key="tournament.name">
+          <v-col cols="12" sm="6" md="4" v-for="tournament in prizesLists" :key="tournament.name">
             <v-card class="pa-4 bg-surface border border-white/10 hover:border-primary">
-              <p class="text-primary font-weight-bold">{{ tournament.name }}</p>
-              <p class="text-black text-opacity-70 text-body-2">{{ tournament.date }}</p>
-              <p class="text-black font-weight-semibold">Résultat : {{ tournament.result }}</p>
+              <p class="text-primary font-weight-bold">{{ tournament.prizeListName }}</p>
+              <p class="text-black text-opacity-70 text-body-2">{{ tournament.tournamentDate }}</p>
+              <p class="text-black font-weight-semibold">{{ $t('pages.player_profile.tournaments.result') }} : {{ tournament.result }}</p>
             </v-card>
           </v-col>
         </v-row>
       </section>
     </v-container>
+
   </v-main>
+  <add-prize-list-pop-up
+    v-model="isOpened"
+    @afterLeave="closePopUp"
+    @create:prizeList="createPrizeList"
+  />
 </template>
 
 <script setup>
@@ -105,8 +111,12 @@ import Header from '@/components/Header.vue'
 import router from '@/router/index.js'
 import TeamsService from '@/services/TeamsService.js'
 import TeamModel from '@/models/TeamModel.js'
+import AddPrizeListPopUp from '@/components/popups/AddPrizeListPopUp.vue'
+import PlayerService from '@/services/PlayerService.js'
 
 const player = ref(new PlayerModel())
+const prizesLists = ref({})
+const isOpened = ref(false)
 
 const stats = computed(() => [
   { label: "Goals", value: player.value.playerGoals },
@@ -124,12 +134,6 @@ const scrims = [
   { opponent: "Solar Flares", score: "2 - 3", result: "Défaite", date: "2023-10-24" },
   { opponent: "Void Runners", score: "4 - 0", result: "Victoire", date: "2023-10-22" },
   { opponent: "Quantum Leapers", score: "1 - 2", result: "Défaite", date: "2023-10-21" },
-];
-
-const tournaments = [
-  { name: "RLCS Winter Major", date: "2023-03-12", result: "Top 8" },
-  { name: "Gamers8 Invitational", date: "2023-08-20", result: "Top 16" },
-  { name: "DreamHack Summer Open", date: "2023-06-15", result: "Top 4" },
 ];
 
 
@@ -173,6 +177,22 @@ async function getAllTeams() {
   }));
 }
 
+function openPopUp() {
+  isOpened.value = true
+}
+
+function closePopUp() {
+  isOpened.value = false
+}
+
+const createPrizeList = async (prizeList) => {
+  await PlayerService.createPrizeList(prizeList);
+  await getAllPrizesLists();
+}
+
+async function getAllPrizesLists() {
+  prizesLists.value = await PlayerService.getAllPrizesLists();
+}
 
 onMounted(async () => {
   const token = localStorage.getItem('token')
@@ -182,6 +202,7 @@ onMounted(async () => {
   }
   await getPlayer();
   await getAllTeams();
+  await getAllPrizesLists();
 });
 
 </script>

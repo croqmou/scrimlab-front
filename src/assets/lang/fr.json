@@ -58,13 +58,43 @@
       "view_profile": "Voir le profil d'équipe",
       "load_more_teams": "Charger plus d'équipes",
       "search_teams": "Rechercher une équipe par nom..."
+    },
+    "player_profile": {
+      "teams": {
+        "title": "Équipes"
+      },
+      "scrims": {
+        "title": "Historique des Scrims",
+        "opponent": "Adversaire",
+        "score": "Score",
+        "result": "Résultat",
+        "date": "Date"
+      },
+      "tournaments": {
+        "title": "Tournois",
+        "add": "Ajouter un tournoi",
+        "result": "Résultat"
+      }
     }
   },
   "popUp": {
-
+    "prize_list": {
+      "add": {
+        "title": "Ajouter un tournoi",
+        "comment": "Veuillez saisir les champs pour ajouter un nouveau tournoi à votre palmarès.",
+        "prize_list_name": "Nom du tournoi",
+        "tournament_date": "Date du tournoi",
+        "tournament_result": "Résultat du tournoi (placement)"
+      }
+    }
   },
   "components": {
-
+    "buttons": {
+      "cancel": "Annuler",
+      "reset": "Réinitialiser",
+      "next": "Suivant",
+      "validate": "Valider"
+    }
   },
   "loading": {
 
@@ -79,6 +109,10 @@
       "get_all": "Erreur lors de la récupération de toutes les équipes",
       "logo_upload": "Erreur lors du téléversement du logo"
     },
+    "prize_list": {
+      "create": "Le tournoi à déjà était ajouté au palmarès",
+      "get": "Erreur lors de la récupération des tournois du palmarès"
+    },
     "unknown": "Erreur inconnue"
   },
   "success": {
@@ -89,6 +123,9 @@
     },
     "teams": {
       "created": "Équipe crées avec succès"
+    },
+    "prize_list": {
+      "created": "Tournoi ajouté au palmarès"
     }
   }
 }
