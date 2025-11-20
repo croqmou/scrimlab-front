@@ -109,6 +109,7 @@
     "teams": {
       "create": "Team already exists",
       "get_all": "Get all teams error",
+      "get_by_name": "Get team error",
       "logo_upload": "Logo upload error"
     },"prize_list": {
       "create": "Tournament already added to prizes list",

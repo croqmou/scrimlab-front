@@ -84,6 +84,18 @@ const TeamsService = {
     }
   },
 
+  async getTeamByTeamName(teamName) {
+    try {
+      const { api } = useAuthFetch()
+      const result = await api.get(`/teams/${encodeURIComponent(teamName)}`)
+      console.log(result.data)
+      return result.data
+    } catch (error) {
+      useNotificationStore().pushNotification([t('errors.teams.get_all')], true);
+      return { success: false, message: t('errors.teams.get_all') }
+    }
+  },
+
   async getAllTeamsByPlayer(player) {
     try {
       const { api } = useAuthFetch()

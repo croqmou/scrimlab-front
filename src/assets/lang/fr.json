@@ -108,6 +108,7 @@
     "teams": {
       "create": "L'équipe existe déjà",
       "get_all": "Erreur lors de la récupération de toutes les équipes",
+      "get_by_name": "Erreur lors de la récupération de l'équipe",
       "logo_upload": "Erreur lors du téléversement du logo"
     },
     "prize_list": {

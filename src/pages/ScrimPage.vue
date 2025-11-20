@@ -248,7 +248,18 @@ const scrims = ref([
 </script>
 
 <style scoped>
-.v-application {
+.v-application,
+.v-application__wrap,
+.v-main {
+  background-color: #111318 !important;
+  color: white !important;
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:deep(input[type="date"]::-webkit-calendar-picker-indicator),
+:deep(input[type="time"]::-webkit-calendar-picker-indicator),
+:deep(input[type="datetime-local"]::-webkit-calendar-picker-indicator) {
+  filter: invert(1);
+  cursor: pointer;
 }
 </style>

@@ -80,6 +80,7 @@
                   color="primary"
                   block
                   class="mt-4 font-weight-bold"
+                  @click="$router.push(`/team-profile/${team.teamName}`)"
                 >
                   {{ $t('pages.teams.view_profile') }}
                 </v-btn>

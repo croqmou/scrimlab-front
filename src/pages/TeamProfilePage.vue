@@ -1,30 +1,7 @@
 <template>
   <v-app>
     <!-- Barre de navigation -->
-    <v-app-bar app flat :color="isDark ? 'surface' : 'grey-lighten-5'" class="px-6">
-      <v-toolbar-title class="d-flex align-center gap-2">
-        <v-icon color="primary">mdi-rocket</v-icon>
-        <span class="font-weight-bold text-white">Rocket Scrims</span>
-      </v-toolbar-title>
-
-      <v-spacer />
-
-      <v-text-field
-        v-if="$vuetify.display.mdAndUp"
-        density="comfortable"
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Rechercher"
-        variant="outlined"
-        color="primary"
-        class="mx-4"
-      ></v-text-field>
-
-      <v-btn color="primary" class="mx-2" variant="flat">Connexion</v-btn>
-      <v-btn variant="outlined" class="text-white" :color="isDark ? 'white' : 'primary'">
-        S'inscrire
-      </v-btn>
-    </v-app-bar>
+    <Header/>
 
     <!-- Contenu principal -->
     <v-main>
@@ -68,7 +45,7 @@
             <!-- Effectif -->
             <v-col cols="12" lg="8">
               <v-card class="mb-6" rounded="xl" elevation="2">
-                <v-card-title class="text-h6 font-weight-bold text-white">Effectif</v-card-title>
+                <v-card-title class="text-h6 font-weight-bold text-black">Effectif</v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
                   <v-row>
@@ -92,7 +69,7 @@
                           <p class="font-weight-bold text-white">{{ player.name }}</p>
                           <p
                             class="text-caption text-uppercase font-weight-medium"
-                            :class="player.role === 'Capitaine' ? 'text-primary' : 'text-grey-lighten-1'"
+                            :class="player.role === 'Capitaine' ? 'text-primary' : 'text-black'"
                           >
                             {{ player.role }}
                           </p>
@@ -106,7 +83,7 @@
               <!-- Matchs récents -->
               <v-card rounded="xl" elevation="2">
                 <v-card-title class="d-flex justify-space-between align-center text-white">
-                  <span class="text-h6 font-weight-bold">Matchs récents</span>
+                  <span class="text-h6 font-weight-bold text-black">Matchs récents</span>
                   <v-btn size="small" variant="text" color="primary" class="font-weight-bold">Voir tout</v-btn>
                 </v-card-title>
                 <v-divider></v-divider>
@@ -118,7 +95,7 @@
                   >
                     <template #prepend>
                       <div class="d-flex align-center justify-end mr-4">
-                        <span class="text-white font-weight-bold text-right mr-2">Team Vortex</span>
+                        <span class="text-black font-weight-bold text-right mr-2">Team Vortex</span>
                         <v-avatar size="32">
                           <v-img :src="match.teamVortexLogo"></v-img>
                         </v-avatar>
@@ -127,7 +104,7 @@
 
                     <template #title>
                       <div class="text-center">
-                        <div class="text-white font-weight-bold">{{ match.score }}</div>
+                        <div class="text-black font-weight-bold">{{ match.score }}</div>
                         <v-chip
                           size="small"
                           :color="match.result === 'VICTOIRE' ? 'success' : 'error'"
@@ -143,7 +120,7 @@
                         <v-avatar size="32">
                           <v-img :src="match.opponentLogo"></v-img>
                         </v-avatar>
-                        <span class="text-white font-weight-bold ml-2">{{ match.opponent }}</span>
+                        <span class="text-black font-weight-bold ml-2">{{ match.opponent }}</span>
                       </div>
                     </template>
                   </v-list-item>
@@ -154,7 +131,7 @@
             <!-- Statistiques -->
             <v-col cols="12" lg="4">
               <v-card rounded="xl" elevation="2" class="sticky top-4">
-                <v-card-title class="text-h6 font-weight-bold text-white">Statistiques</v-card-title>
+                <v-card-title class="text-h6 font-weight-bold text-black">Statistiques</v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
                   <v-row>
@@ -168,7 +145,7 @@
                       <p
                         :class="[
                           'text-h5 font-weight-bold',
-                          stat.color ? `text-${stat.color}` : 'text-white',
+                          stat.color ? `text-${stat.color}` : 'text-black',
                         ]"
                       >
                         {{ stat.value }}
@@ -186,11 +163,16 @@
 </template>
 
 <script setup>
-import { useTheme } from 'vuetify'
-const theme = useTheme()
-const isDark = theme.global.name.value === 'dark'
+import Header from '@/components/Header.vue'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import TeamsService from '@/services/TeamsService.js'
 
-// Données d'exemple
+const route = useRoute()
+
+const team = ref({})
+
+
 const players = [
   {
     name: 'Shadow',
@@ -258,4 +240,31 @@ const stats = [
   { label: 'Série actuelle', value: 'W3', color: 'success' },
   { label: 'Rang moyen', value: 'GC1', color: 'info' },
 ]
+
+
+async function getTeam(){
+  const teamName = route.params.teamName;
+  team.value = await TeamsService.getTeamByTeamName(teamName);
+}
+
+onMounted(() => {
+  getTeam()
+})
+
 </script>
+<style scoped>
+.v-application,
+.v-application__wrap,
+.v-main {
+  background-color: #111318 !important;
+  color: white !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:deep(input[type="date"]::-webkit-calendar-picker-indicator),
+:deep(input[type="time"]::-webkit-calendar-picker-indicator),
+:deep(input[type="datetime-local"]::-webkit-calendar-picker-indicator) {
+  filter: invert(1);
+  cursor: pointer;
+}
+</style>
