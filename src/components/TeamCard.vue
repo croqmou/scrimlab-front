@@ -40,6 +40,9 @@
 
 <script setup lang="ts">
 
+import { getLogoUrl } from '@/utils/ImageUrl.js'
+
+
 defineProps({
   teamName: String,
   teamLogo: String,
@@ -49,9 +52,6 @@ defineProps({
   teamLoses: Number
 })
 
-const getLogoUrl = (file: string) => {
-  return new URL(`../assets/img/teams-logos/${file}`, import.meta.url).href
-}
 </script>
 
 

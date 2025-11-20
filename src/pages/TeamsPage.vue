@@ -104,6 +104,7 @@
 
 import TeamModel from '@/models/TeamModel.js'
 import TeamsService from '@/services/TeamsService.js'
+import { getLogoUrl, getBannerUrl } from '@/utils/ImageUrl.js'
 import { onMounted, ref, watch } from 'vue'
 import Header from '@/components/Header.vue'
 import { useRouter } from 'vue-router'
@@ -143,13 +144,7 @@ async function getAllTeams() {
   }));
 }
 
-const getLogoUrl = (file) => {
-  return new URL(`../assets/img/teams-logos/${file}`, import.meta.url).href
-}
 
-const getBannerUrl = (file) => {
-  return new URL(`../assets/img/teams-banners/${file}`, import.meta.url).href
-}
 
 onMounted(() => {
   getAllTeams()

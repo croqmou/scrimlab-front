@@ -59,6 +59,20 @@
       "load_more_teams": "Charger plus d'équipes",
       "search_teams": "Rechercher une équipe par nom..."
     },
+    "team_profile": {
+      "propose_scrim": "Proposer un scrim",
+      "roster": "Effectif",
+      "recent_matches": "Matchs récents",
+      "see_all": "Voir tout",
+      "statistics": "Statistiques",
+      "ranking_points": "Points de rang",
+      "victories": "Victoires",
+      "captain": "Capitaine",
+      "player": "Joueur",
+      "sub": "Remplaçant",
+      "coach": "Entraîneur",
+      "manager": "Manager"
+    },
     "player_profile": {
       "teams": {
         "title": "Équipes"

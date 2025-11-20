@@ -10,7 +10,7 @@
           <!-- Bannière -->
           <v-card class="mb-8" rounded="xl" elevation="3">
             <v-img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRmyndKGohpJSeHVawBSwsCInTWcgpPu-5p6gJ7ZuA0jOcMcyTXEOqgSsXUCEjQ2g_R30LJJusaopAWjUgIeqjFAYfAvxV35_I0oSGPyr6EUldTyn872M4ctyp-mctkVRC16nrgSrbhAmjEgs_1FP1BSnqfWaV0_rhbAVh4vdtZJGHMHKz_btuCX3XJRs2jkqc3a2b3XgkuW8qFmjoo00yDHuisKYqg3htZK6NxoejSALV8LHM3RvKuX9gkXr1VlZpi2Qmb8KNzn0"
+              :src="getBannerUrl(team.teamBanner)"
               height="280"
               cover
             >
@@ -20,38 +20,35 @@
                   style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);"
                 >
                   <v-col cols="12" md="8" class="d-flex align-end gap-4">
-                    <v-avatar size="96">
+                    <v-avatar size="96" class="mr-5">
                       <v-img
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCseEtGvRixZ2jEFk8mzb3kWl8Mh_aZpTxz7fooHTMiDdx1uKIT3zXNjdqWvE7Ae4lx3rioF9nBPZxAhDFwX5FcwuM2WaIvaVMnxCxlgCxmHUfEwZLJ-bdRC6VN2Wv2YPwK2wATpCMW-7RmOafFpWyu-6LHi4dSV-Je3VrbpVxAuctK2EYuITnyz3jVadHW7FTTTytAhjAdrhIZHl9E7nWrNbvBH5RxIUvds3Eo5--5K9hwCXjwHa6Zdi7o2UM4YIFXoCkRpPr9RM"
+                        :src="getLogoUrl(team.teamLogo)"
                         alt="Logo de l'équipe"
                       ></v-img>
                     </v-avatar>
                     <div>
-                      <h2 class="text-h5 font-weight-bold text-white">Team Vortex</h2>
-                      <p class="text-body-2 text-grey-lighten-1">Équipe compétitive Rocket League</p>
+                      <h2 class="text-h5 font-weight-bold text-white">{{ team.teamName }}</h2>
+                      <p class="text-body-2 text-grey-lighten-1">{{ team.teamDescription }}</p>
                     </div>
                   </v-col>
                   <v-col cols="12" md="4" class="d-flex justify-end align-end">
-                    <v-btn variant="outlined" class="mr-3 text-white">Proposer un scrim</v-btn>
-                    <v-btn color="primary" variant="flat">Suivre l'équipe</v-btn>
+                    <v-btn color="primary" variant="flat">{{ $t('pages.team_profile.propose_scrim') }}</v-btn>
                   </v-col>
                 </v-row>
               </template>
             </v-img>
           </v-card>
 
-          <!-- Grille principale -->
           <v-row dense>
-            <!-- Effectif -->
             <v-col cols="12" lg="8">
               <v-card class="mb-6" rounded="xl" elevation="2">
-                <v-card-title class="text-h6 font-weight-bold text-black">Effectif</v-card-title>
+                <v-card-title class="text-h6 font-weight-bold text-black">{{ $t('pages.team_profile.roster') }}</v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
                   <v-row>
                     <v-col
                       v-for="player in players"
-                      :key="player.name"
+                      :key="player.infos.email"
                       cols="12"
                       sm="6"
                       md="4"
@@ -63,13 +60,12 @@
                         class="pa-4 text-center bg-background-dark"
                       >
                         <v-avatar size="80" class="mb-3">
-                          <v-img :src="player.image" :alt="player.name" cover></v-img>
+                          <v-img :src="getPlayerPP(player.infos.pp)" :alt="player.infos.username" cover></v-img>
                         </v-avatar>
                         <div>
-                          <p class="font-weight-bold text-white">{{ player.name }}</p>
+                          <p class="font-weight-bold text-black">{{ player.infos.username }}</p>
                           <p
-                            class="text-caption text-uppercase font-weight-medium"
-                            :class="player.role === 'Capitaine' ? 'text-primary' : 'text-black'"
+                            class="text-caption text-uppercase font-weight-medium text-primary"
                           >
                             {{ player.role }}
                           </p>
@@ -83,8 +79,8 @@
               <!-- Matchs récents -->
               <v-card rounded="xl" elevation="2">
                 <v-card-title class="d-flex justify-space-between align-center text-white">
-                  <span class="text-h6 font-weight-bold text-black">Matchs récents</span>
-                  <v-btn size="small" variant="text" color="primary" class="font-weight-bold">Voir tout</v-btn>
+                  <span class="text-h6 font-weight-bold text-black">{{ $t('pages.team_profile.recent_matches') }}</span>
+                  <v-btn size="small" variant="text" color="primary" class="font-weight-bold">{{ $t('pages.team_profile.see_all') }}</v-btn>
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-list lines="one">
@@ -131,24 +127,41 @@
             <!-- Statistiques -->
             <v-col cols="12" lg="4">
               <v-card rounded="xl" elevation="2" class="sticky top-4">
-                <v-card-title class="text-h6 font-weight-bold text-black">Statistiques</v-card-title>
+                <v-card-title class="text-h6 font-weight-bold text-black">{{ $t('pages.team_profile.statistics') }}</v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
                   <v-row>
                     <v-col
-                      v-for="stat in stats"
-                      :key="stat.label"
                       cols="12"
                       class="d-flex flex-column align-center pa-4 mb-2 border"
                     >
-                      <p class="text-caption text-grey-lighten-1">{{ stat.label }}</p>
+                      <p class="text-caption text-grey-lighten-1">{{ $t('pages.team_profile.ranking_points') }}</p>
                       <p
-                        :class="[
-                          'text-h5 font-weight-bold',
-                          stat.color ? `text-${stat.color}` : 'text-black',
-                        ]"
+                        class="text-h5 font-weight-bold text-warning"
                       >
-                        {{ stat.value }}
+                        {{ team.rankingPoints }}
+                      </p>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      class="d-flex flex-column align-center pa-4 mb-2 border"
+                    >
+                      <p class="text-caption text-grey-lighten-1">{{ $t('pages.team_profile.victories') }}</p>
+                      <p
+                        class="text-h5 font-weight-bold text-success"
+                      >
+                        {{ team.teamGoals }}
+                      </p>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      class="d-flex flex-column align-center pa-4 mb-2 border"
+                    >
+                      <p class="text-caption text-grey-lighten-1">{{ $t('pages.team_profile.loses') }}</p>
+                      <p
+                        class="text-h5 font-weight-bold text-error"
+                      >
+                        {{ team.teamLoses }}
                       </p>
                     </v-col>
                   </v-row>
@@ -164,41 +177,21 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import TeamsService from '@/services/TeamsService.js'
+import { getLogoUrl, getBannerUrl, getPlayerPP } from '@/utils/ImageUrl.js'
+import {useI18n} from "vue-i18n";
+
+
+const {t, locale} = useI18n()
 
 const route = useRoute()
 
 const team = ref({})
 
 
-const players = [
-  {
-    name: 'Shadow',
-    role: 'Capitaine',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBbE6An46aEuW5exPsTr5l8QzZzWbYbe48joWvOJtqrMpLj5lcDKkrMa79IYbpPmznMbXA3T2jd3HuSzeDnzlOhRtPTvHcqQaEgCrMJbrjpIpwGWXrZ8toLUSjmGtCjmFBm4fo7eYceTELWJDt-YjmxxycjE5ZQPS39aFHp2BSjrdWXutxX8yGbrQGduVQTcueedskzt_77_b6RMffxwMCPtooe24oRSHaycJsvM4HLryzZclGK-ojKJ_Mgd44_a0hSVdA1R5zFfS0',
-  },
-  {
-    name: 'Blaze',
-    role: 'Joueur',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCTkVaa85LoTRgW9mD-SoE63Oa6aLWTbKc_9SeWlDGQfrfmB33W3WTO5bcz4_O08x6-K1JLTr623k7ZlYKax6bBqIr6d1kcYLccG7UrtepecWMltSyq8M8x7Q9IykgQ7Z72siD4CC73GNjg16yJ5qpl4FkM2m4t2HBBmAUA52dtGJau-qFciIhWwuivLee6KjprRSQxIz5jjU1F4W2xImpJEfGYO-vrMSzmoyibBqV7m_6tTbzDOgbjjxON0Ke10v7lWcJc1VmHJ0g',
-  },
-  {
-    name: 'Nova',
-    role: 'Joueur',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAuOW4dWdBXm68Vbr_8SX00koYoo1sscLXhr4KrBdy900ffUysGFYnR0oltppbZSHyCVQzSd7aDszu2ge8YyAkYizKiS5ZCHY_bA2v6ILr4o31s6npRWTGL_6bWECMt6DMeNA1GUfetbkrOWxlUKr5dblql2aRewtyIHObA8CPAEesFL7vPawSknnBcG8z_UKzpDEoGrqpEfmfEk56WSDEHWWCFAIqhSzDD-j0zBNUYj7lCVH1PZu5ftEQEgKimGp7xW-7p1ZYQQFc',
-  },
-  {
-    name: 'Apex',
-    role: 'Coach',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDyX--J-kryWG4pnna-cYD5g8a3ACQyNgMgJzeh9pG6XtZNtchxvAkw_VDXYtw2Ro9BLNAY5AE6Pl1gN0S5ag6EfiOxNTQdOGsb7g0qZbyayC2uHmkk_PXL2vDiV8uBtVhhfmKpSLCoa_Y0rpX79hGvFDQknVjILlAESvrY4_BJUIh8baBNGvn5YP-rhoWKfDUQR_KdpBp9NGDOfpt3YjmFeZhhF18kquXlsiuoiQs8e7ETCMPAwPjQjn6SEh34CDkLnKcL4HiegPs',
-  },
-]
+const players = ref([])
 
 const matches = [
   {
@@ -233,19 +226,26 @@ const matches = [
   },
 ]
 
-const stats = [
-  { label: 'Victoires', value: '24', color: 'success' },
-  { label: 'Défaites', value: '8', color: 'error' },
-  { label: 'Winrate', value: '75%', color: 'primary' },
-  { label: 'Série actuelle', value: 'W3', color: 'success' },
-  { label: 'Rang moyen', value: 'GC1', color: 'info' },
-]
-
+function getAllPlayers(team){
+  if(team.captain !== null) players.value.push({ infos: team.captain, role: t('pages.team_profile.captain') })
+  if(team.playerEntityTwo !== null) players.value.push({ infos: team.playerEntityTwo, role: t('pages.team_profile.player') })
+  if(team.playerEntityThree !== null) players.value.push({ infos: team.playerEntityThree, role: t('pages.team_profile.player') })
+  if(team.sub !== null) players.value.push({ infos: team.sub, role: t('pages.team_profile.sub') })
+  if(team.secondSub !== null) players.value.push({ infos: team.secondSub, role: t('pages.team_profile.sub') })
+  if(team.coach !== null) players.value.push({ infos: team.coach, role: t('pages.team_profile.coach') })
+  if(team.manager !== null) players.value.push({ infos: team.manager, role: t('pages.team_profile.manager') })
+}
 
 async function getTeam(){
   const teamName = route.params.teamName;
   team.value = await TeamsService.getTeamByTeamName(teamName);
+  await getAllPlayers(team.value);
 }
+
+watch(locale, (newLocale, oldLocale) => {
+  players.value = []
+  getAllPlayers(team.value);
+})
 
 onMounted(() => {
   getTeam()

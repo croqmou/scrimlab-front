@@ -59,6 +59,21 @@
       "load_more_teams": "Load more teams",
       "search_teams": "Research a team by name..."
     },
+    "team_profile": {
+      "propose_scrim": "Propose a scrim",
+      "roster": "Roster",
+      "recent_matches": "Recent matches",
+      "see_all": "See all",
+      "statistics": "Statistics",
+      "ranking_points": "Ranking points",
+      "victories": "Wins",
+      "loses": "Losses",
+      "captain": "Captain",
+      "player": "Player",
+      "sub": "Sub",
+      "coach": "Coach",
+      "manager": "Manager"
+    },
     "player_profile": {
       "teams": {
         "title": "Teams"

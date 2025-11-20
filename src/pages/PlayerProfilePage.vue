@@ -110,6 +110,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import PlayerModel from '@/models/PlayerModel.js'
+import { getLogoUrl } from '@/utils/ImageUrl.js'
 import Header from '@/components/Header.vue'
 import router from '@/router/index.js'
 import TeamsService from '@/services/TeamsService.js'
@@ -162,9 +163,6 @@ async function getPlayer() {
   });
 }
 
-const getLogoUrl = (file) => {
-  return new URL(`../assets/img/teams-logos/${file}`, import.meta.url).href
-}
 
 async function getAllTeams() {
   const response = await TeamsService.getAllTeamsByPlayer(player.value);
