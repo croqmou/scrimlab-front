@@ -57,7 +57,8 @@
                       <v-card
                         rounded="lg"
                         elevation="1"
-                        class="pa-4 text-center bg-background-dark"
+                        class="pa-4 text-center bg-background-dark cursor-pointer"
+                        @click="$router.push(`/profile/${player.infos.username}`)"
                       >
                         <v-avatar size="80" class="mb-3">
                           <v-img :src="getPlayerPP(player.infos.pp)" :alt="player.infos.username" cover></v-img>

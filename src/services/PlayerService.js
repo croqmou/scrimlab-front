@@ -5,6 +5,23 @@ import { useNotificationStore } from '@/stores/useNotificationStore.js'
 const {t} = i18n.global
 
 const PlayerService = {
+
+  async getPlayerByUsername(username) {
+    try {
+      const { api } = useAuthFetch()
+      const response = await api.get(`/player/${username}`)
+
+      useNotificationStore().pushNotification([t('success.prize_list.created')], false);
+      return response.data
+    } catch (error) {
+      useNotificationStore().pushNotification([t('errors.prize_list.create')], true);
+      return {
+        success: false,
+        message: t("errors.prize_list.create"),
+      }
+    }
+  },
+
   async createPrizeList(prizeList) {
     try {
       const { api } = useAuthFetch()
@@ -20,10 +37,10 @@ const PlayerService = {
       }
     }
   },
-  async getAllPrizesLists() {
+  async getAllPrizesLists(playerEmail) {
     try {
       const { api } = useAuthFetch()
-      const response = await api.get("/player/prize-list")
+      const response = await api.get(`/player/prize-list/${playerEmail}`)
       return response.data
     } catch (error) {
       useNotificationStore().pushNotification([t('errors.prize_list.get')], true);

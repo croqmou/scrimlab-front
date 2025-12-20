@@ -16,7 +16,7 @@ const routes = [
   { path: '/login', name: 'Login', component: Login },
   { path: '/new-scrim', name: 'NewScrim', component: ScrimForm, meta: { requiresAuth: true } },
   { path: '/teams', name: 'Teams', component: TeamsPage, meta: { requiresAuth: false } },
-  { path: '/profile', name: 'PlayerProfile', component: PlayerProfilePage, meta: { requiresAuth: true } },
+  { path: '/profile/:username', name: 'PlayerProfile', component: PlayerProfilePage, meta: { requiresAuth: true } },
   { path: '/team-profile/:teamName', name: 'TeamProfile', component: TeamProfilePage, meta: { requiresAuth: false } }
 ]
 

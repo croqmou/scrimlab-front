@@ -27,7 +27,8 @@
             {{ userStore.token ? $t('layouts.default.header.logout') : $t('layouts.default.header.login') }}
           </v-btn>
 
-          <v-avatar v-if="userStore.token" size="40" class="ma-3 overflow-hidden" @click="$router.push('/profile')">
+          <v-avatar v-if="userStore.token" size="40" class="ma-3 overflow-hidden"   @click="goToProfile"
+          >
             <img
               :src="getPlayerPP()"
               alt="player"
@@ -143,6 +144,13 @@ const userStore = useUserStore();
 
 const { locale } = useI18n()
 
+const player = JSON.parse(localStorage.getItem('player') || '{}')
+
+const goToProfile = () => {
+  if (player.email) {
+    router.push(`/profile/${player.username}`)
+  }
+}
 
 const drawer = ref(false);
 const selectedCountry = ref({ code: locale.value, flag: locale.value === 'EN' ? 'https://flagcdn.com/w40/gb.png' : 'https://flagcdn.com/w40/fr.png' })

@@ -37,7 +37,7 @@
         <h2 class="text-white text-h6 font-weight-bold mb-4">{{ $t('pages.player_profile.teams.title') }}</h2>
         <v-row>
           <v-col cols="12" sm="6" md="4" v-for="team in teams" :key="team.name">
-            <v-card class="pa-4 text-center bg-surface border border-white/10">
+            <v-card class="pa-4 text-center bg-surface border border-white/10 cursor-pointer" @click="$router.push(`/team-profile/${team.teamName}`)">
               <v-avatar size="64" class="mx-auto mb-3">
                 <v-img :src="getLogoUrl(team.teamLogo)" />
               </v-avatar>
@@ -76,7 +76,7 @@
         </v-table>
       </section>
 
-      <!-- Tournois -->
+      <!-- Tournaments -->
       <section class="mt-8">
         <div class="d-flex justify-space-between align-center mb-4">
           <h2 class="text-white text-h6 font-weight-bold">{{ $t('pages.player_profile.tournaments.title') }}</h2>
@@ -117,7 +117,9 @@ import TeamsService from '@/services/TeamsService.js'
 import TeamModel from '@/models/TeamModel.js'
 import AddPrizeListPopUp from '@/components/popups/AddPrizeListPopUp.vue'
 import PlayerService from '@/services/PlayerService.js'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const player = ref(new PlayerModel())
 const prizesLists = ref({})
 const isOpened = ref(false)
@@ -147,20 +149,7 @@ function getPlayerPP() {
 }
 
 async function getPlayer() {
-  const plr = JSON.parse(localStorage.getItem("player"));
-
-  player.value = ({
-    username: plr.username,
-    email: plr.email,
-    pp: plr.pp,
-    admin: plr.admin,
-    playerGoals: plr.playerGoals,
-    playerWins: plr.playerWins,
-    playerLoses: plr.playerLoses,
-    rankingPoints1s: plr.rankingPoints1s,
-    rankingPoints2s: plr.rankingPoints2s,
-    rankingPoints3s: plr.rankingPoints3s
-  });
+  player.value = await PlayerService.getPlayerByUsername(route.params.username);
 }
 
 
@@ -192,7 +181,7 @@ const createPrizeList = async (prizeList) => {
 }
 
 async function getAllPrizesLists() {
-  prizesLists.value = await PlayerService.getAllPrizesLists();
+  prizesLists.value = await PlayerService.getAllPrizesLists(player.value.email);
 }
 
 onMounted(async () => {
